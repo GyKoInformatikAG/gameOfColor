@@ -1,21 +1,12 @@
-
-
-
 https://github.com/anonymous123-code/gameOfColor
-
-http://help.eclipse.org/2019-12/index.jsp
-EGit Documentatione
-EGit User Guide
-Getting Started
-
 
 
 GUI (Graphical User Interface)
 ===============================
--> Fenster auf dem die K‰stchen gesetzt werden
+-> Fenster auf dem die K√§stchen gesetzt werden
 
 Aufgabenblock: 	
-Welche "Fenster" gibt es und wie h‰ngen sie zusammen?
+Welche "Fenster" gibt es und wie h√§ngen sie zusammen?
 Entwurf der GUI-Elemente auf den Fenstern.
 
 
