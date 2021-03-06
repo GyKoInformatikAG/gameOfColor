@@ -6,8 +6,9 @@ GUI (Graphical User Interface)
 -> Fenster auf dem die KÃ¤stchen gesetzt werden
 
 Aufgabenblock: 	
-Welche "Fenster" gibt es und wie hÃ¤ngen sie zusammen?
+Welche "Fenster" gibt es und wie hängen sie zusammen?
 Entwurf der GUI-Elemente auf den Fenstern.
+
 
 
 Anwendung
@@ -16,7 +17,7 @@ Anwendung
 -> Ablauf
 
 
------------
+----------- Hier sind wir noch nicht fertig mit Überlegen
 
 Netz
 ====
