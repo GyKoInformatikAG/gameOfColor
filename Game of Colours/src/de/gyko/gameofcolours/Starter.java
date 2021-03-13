@@ -3,7 +3,7 @@ package de.gyko.gameofcolours;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import de.gyko.gameofcolours.app.GameOfColours;
+import de.gyko.gameofcolours.app.GameOfColors;
 
 /**
  * Diese Klasse startet das Spiel.
@@ -28,7 +28,7 @@ public class Starter {
 	 * Startet den Starter.
 	 */
 	private void run() {
-		GameOfColours gameOfColours = new GameOfColours();
+		GameOfColors gameOfColors = new GameOfColors();
 		Logger.getLogger("de.gyko.gameofcolours").log(Level.INFO, "Hallo Welt");
 	}
 
