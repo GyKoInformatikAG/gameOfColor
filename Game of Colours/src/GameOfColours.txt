@@ -15,13 +15,21 @@ Es gibt eine Minimalanzahl von Spielern und es gibt eine Maximalanzahl von Spiel
 GUI (Graphical User Interface)
 ===============================
 -> Fenster auf dem die Kästchen gesetzt werden
+<<<<<<< Upstream, based on branch 'master' of https://github.com/anonymous123-code/gameOfColor
 -> Horcht auf die Anwendung und stellt sie dar.
 -> Zoomfunktion
+=======
+>>>>>>> bef22c4 Kleine Fehlerbehebung
 
+<<<<<<< Upstream, based on branch 'master' of https://github.com/anonymous123-code/gameOfColor
 Welche "Fenster" gibt es und wie hängen sie zusammen?
 1.) HAUPTFENSTER: Hier läuft das eigentliche Spiel ab
 2.) VERBINDEN: Dialog, um sich mit dem Server zu verbinden.
 
+=======
+Aufgabenblock: 	
+Welche "Fenster" gibt es und wie hängen sie zusammen?
+>>>>>>> bef22c4 Kleine Fehlerbehebung
 Entwurf der GUI-Elemente auf den Fenstern.
 
 1.) HAUPTFENSTER
