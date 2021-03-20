@@ -1,4 +1,4 @@
-package de.gyko.gameofcolours.app;
+package de.gyko.gameofcolors.app;
 
 import java.util.logging.Logger;
 
@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 public class GameOfColors {
 	
 	/**
-	 * Diese Variable hält den Logger für das gesamte Spiel fest.
+	 * Diese Variable hÃ¤lt den Logger fÃ¼r das gesamte Spiel fest.
 	 */
 	@SuppressWarnings("unused")
 	private Logger logger = Logger.getLogger("de.gyko.gameofcolours");
