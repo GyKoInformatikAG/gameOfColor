@@ -8,7 +8,7 @@ Beim Spielen soll man Kästchen in der Spielerfarbe setzen.
 Jeder Spieler hat eine Farbe.
 Dabei sollen leere Kästchen gefüllt werden.
 Schon gefüllte Kästchen sollen übermalt werden.
-Die größe der Spielfläche richtet sich nach der Anzahl der Spieler.
+Die Größe des Spielfeldes richtet sich nach der Anzahl der Spieler.
 Es gibt eine Minimalanzahl von Spielern und es gibt eine Maximalanzahl von Spielern für ein Spiel.
 
 
@@ -29,7 +29,7 @@ Entwurf der GUI-Elemente auf den Fenstern.
 
 HAUPTFENSTER
 ------------
-* Bereich, in den man hineinklicken kann und bei dem dann ein Kästchen in der Spielerfarbe gesetzt wird.
+* Bereich, in den man hineinklicken kann und bei dem dann ein Kästchen in der Spielerfarbe gesetzt wird. (Spielfeld)
 * Liste mit den Spielernamen und welche Farbe die haben
 * Spielstandsanzeige
 * Zeitlimit / Zeitanzeige
@@ -50,9 +50,12 @@ VERBINDEN
 
 Anwendung
 =========
+* Spieler und seine Eigenschaften (Felder) und Aktionen/Tätigkeiten (Methoden)
+* Spielfeld und seine Eigenschaften und was man mit dem Spielfeld machen kann
 * Logik des Programms
 * Ablauf
 * Nutzung des Netzwerks
+
 
 
 -----------
