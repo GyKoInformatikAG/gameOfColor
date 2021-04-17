@@ -5,7 +5,7 @@ import de.gyko.gameofcolors.app.Spieler;
 /**
  * 
  * Die Klasse SpielerTest ist nur zum Testen der Klasse Spieler gedacht.
- * Sie enthält keinen Code, der für "Game Of Color" erforderlich ist.
+ * Sie enthaelt keinen Code, der fuer "Game Of Color" erforderlich ist.
  * 
  * @author Thorsten
  *
