@@ -3,6 +3,8 @@ package de.gyko.gameofcolors.net;
 import java.awt.*;
 import java.nio.charset.StandardCharsets;
 
+import static de.gyko.gameofcolors.Utility.uint;
+
 /*
  * The Packet the Server sends when a new Player joins
  *
@@ -14,21 +16,26 @@ public class PlayerJoinPacket extends Packet{
     public PlayerJoinPacket(byte... content) {
         super(content);
         if(!id.equals("plj")) throw new IllegalArgumentException("wrong packetId");
-        if(content.length < 9){
-            throw new IllegalArgumentException("Too little bytes");
+        if(content.length < 7){
+            throw new IllegalArgumentException("too little bytes");
         }
 
-        int nameLength = rawContent[3];
-
-        if(nameLength <= 0 || rawContent.length != 7 + nameLength) {
-            throw new IllegalArgumentException("Too little bytes");
+        int nameLength = uint(rawContent[3]);
+        if(nameLength <= 0) {
+            throw new IllegalArgumentException("nameLength must not be 0");
+        }
+        if(rawContent.length < 7 + nameLength) {
+            throw new IllegalArgumentException("too little bytes");
+        }
+        if(rawContent.length > 7 + nameLength) {
+            throw new IllegalArgumentException("too much bytes");
         }
 
         byte[] playerNameBytes = new byte[nameLength];
-        System.arraycopy(rawContent, 5, playerNameBytes, 0, nameLength);
+        System.arraycopy(rawContent, 4, playerNameBytes, 0, nameLength);
         playerName = new String(playerNameBytes);
 
-        playerColor = new Color((short) rawContent[nameLength + 4], (short) rawContent[nameLength + 5], (short) rawContent[nameLength + 6]);
+        playerColor = new Color(uint(rawContent[nameLength + 4]), uint(rawContent[nameLength + 5]), uint(rawContent[nameLength + 6]));
     }
 
     public PlayerJoinPacket(String playerName, Color playerColor){
