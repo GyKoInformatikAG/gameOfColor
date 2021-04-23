@@ -17,6 +17,9 @@ public abstract class Packet {
         id = new String(new byte[]{content[0], content[1], content[2]});
     }
 
+    public Packet() {
+    }
+
     public byte[] getRawContent() {
         return rawContent;
     }
