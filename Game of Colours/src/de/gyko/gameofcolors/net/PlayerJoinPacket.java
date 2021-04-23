@@ -11,8 +11,8 @@ import static de.gyko.gameofcolors.Utility.uint;
  * @author anonymous123-code
  */
 public class PlayerJoinPacket extends Packet{
-    private String playerName;
-    private Color playerColor;
+    private final String playerName;
+    private final Color playerColor;
     public PlayerJoinPacket(byte... content) {
         super(content);
         if(!id.equals("plj")) throw new IllegalArgumentException("wrong packetId");
