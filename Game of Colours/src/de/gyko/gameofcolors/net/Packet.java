@@ -31,10 +31,6 @@ public abstract class Packet {
 /*
    server -> client
 
- player join // done
- id        nameLength name         color
- 70 6c 6a  04         4f 74 74 6f  ff 00 00
- plj       4          Otto         #ff0000
 
  player leave
  id        color
@@ -52,12 +48,8 @@ public abstract class Packet {
  win         4          Otto         #ff0000
 
 
-   client -> server
+   client ->  server
 
- player join
- id        nameLength name         color
- 70 6c 6a  00 04      4f 74 74 6f  ff 00 00
- plj       4          Otto         #ff0000
 
  player leave
  id
@@ -69,3 +61,23 @@ public abstract class Packet {
  64 72 77 00 01            02  00 01  05
  drw      1                2   1      5
 */
+
+
+
+/* FERTIG
+   server -> client
+
+ player join
+ id        nameLength name         color
+ 70 6c 6a  04         4f 74 74 6f  ff 00 00
+ plj       4          Otto         #ff0000
+
+
+   client -> server
+
+ player join
+ id        nameLength name         color
+ 70 6c 6a  00 04      4f 74 74 6f  ff 00 00
+ plj       4          Otto         #ff0000
+
+ */
