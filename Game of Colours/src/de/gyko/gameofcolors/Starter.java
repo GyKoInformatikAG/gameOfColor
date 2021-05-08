@@ -28,6 +28,7 @@ public class Starter {
 	 * Startet den Starter.
 	 */
 	private void run() {
+		@SuppressWarnings("unused")
 		GameOfColors gameOfColors = new GameOfColors();
 		Logger.getLogger("de.gyko.gameofcolours").log(Level.INFO, "Hallo Welt");
 	}
