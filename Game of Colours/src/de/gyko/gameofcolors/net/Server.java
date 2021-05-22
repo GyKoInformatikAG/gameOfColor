@@ -17,6 +17,8 @@ public class Server implements Runnable{
 
     private Socket socket;
     private boolean closed = false;
+    private int clientId = PacketReceiveEvent.CLIENT_ID_NOT_INITIALIZED;
+    private PacketReceiveListener packetReceiveListener = null;
 
     Map<String, String> map = Collections.synchronizedMap(new HashMap<>());
 
@@ -37,6 +39,10 @@ public class Server implements Runnable{
         }
     }
 
+    public void setPacketReceiveListener(PacketReceiveListener packetReceiveListener) {
+        this.packetReceiveListener = packetReceiveListener;
+    }
+
     public static void main(String... args){
         new Server(6000);
     }
@@ -52,7 +58,11 @@ public class Server implements Runnable{
 
             while (!closed) {
                 //TODO: Aktuell nur ein Echo -> Richtig implementieren
+
                 String input = scanner.nextLine();
+                /*if (packetReceiveListener != null) {
+                    packetReceiveListener.onPacketReceived(new PacketReceiveEvent(clientId, new Packet() {}));
+                }*/
                 String[] inputSplit = input.split(" ");
                 if(inputSplit.length < 2){
                     outputStreamWriter.println(input);
@@ -64,7 +74,7 @@ public class Server implements Runnable{
                     }
                 } else if (inputSplit[0].equalsIgnoreCase("get")){
                     String result = map.get(inputSplit[1]);
-                    outputStreamWriter.println(Objects.requireNonNullElse(result, "ERROR: Key not found"));
+                    outputStreamWriter.println(result!=null?result:"ERROR: Key not found");
                 }
             }
         } catch (IOException e) {
