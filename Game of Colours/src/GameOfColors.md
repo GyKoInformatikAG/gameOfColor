@@ -55,7 +55,11 @@ Anwendung
 * Logik des Programms
 * Ablauf
 * Nutzung des Netzwerks
-
+@Sophia
+* Das Battlefield (Spielfeld) besteht aus einem Koordinatensystem mit 	insegesammt 225 Kästchen 
+		->Auf der x- und y-Achse des Koodrdinatensystems befinden sich jeweils 		insgesammt 15 Kästchen, wobei das erste Kästchen direkt am Ursprung 		die Koordinate (0/0) hat.
+		Daher wird auf den Achsen von Null bis 14 "nummeriert".
+		Der Ursprung liegt unten links im "Battlefield".
 
 
 -----------
