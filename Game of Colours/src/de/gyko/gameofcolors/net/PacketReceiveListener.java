@@ -7,7 +7,4 @@ package de.gyko.gameofcolors.net;
  */
 public abstract class PacketReceiveListener {
     public abstract PacketSendRequest[] onPacketReceived (PacketReceiveEvent p);
-    synchronized PacketSendRequest[] packetReceive (PacketReceiveEvent p) {
-        return this.onPacketReceived(p);
-    }
 }
