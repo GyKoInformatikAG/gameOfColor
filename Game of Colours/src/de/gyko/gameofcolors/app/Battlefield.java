@@ -19,6 +19,16 @@ public class Battlefield {
    public void setColorAt(int x, int y, Color color){	
 	}
    
+   /**
+    * Diese Methode liefert die Farbe zurück, die das 
+    * Spielfeld auf der Koordinate (x/y) hat.
+    * @param x
+    * @param y
+    * @return
+    */
+   public Color getColorAt(int x, int y) {
+   }
+   
    
    /**
     * Die Höhe des Battlefields in der Einheit Anzahl Kästchen.
