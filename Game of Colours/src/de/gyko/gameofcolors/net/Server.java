@@ -7,8 +7,8 @@ import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-/*
- * Spielt die Rolle eines Servers
+/**
+ * Nimmt die Rolle eines Servers ein.
  *
  * @author anonymous123-code
  */
@@ -19,13 +19,21 @@ public class Server implements Runnable{
     private final ArrayList<OutputStream> channels = new ArrayList<>();
     int port;
 
+    /**
+     * Erstellt und initialisiert einen Server für einen bestimmten Port.
+     *
+     * @param packetReceiveListener der PacketReceiveListener, der benachrichtigt wird, wenn ein Packet empfangen wurde
+     * @param port Port für den Server
+     */
     public Server (PacketReceiveListener packetReceiveListener,int port){
         this.port = port;
         this.packetReceiveListener = packetReceiveListener;
         new Thread(this).start();
     }
 
-
+    /**
+     * Fuehrt den Server-Thread aus. (Nicht aufrufen!)
+     */
     @Override
     public void run() {
         ExecutorService threadPool = Executors.newCachedThreadPool();

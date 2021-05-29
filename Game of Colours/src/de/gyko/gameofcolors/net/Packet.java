@@ -1,14 +1,24 @@
 package de.gyko.gameofcolors.net;
 
-/*
- * A basic network packet
+/**
+ * Ein einfaches Netzwerk-Packet
  *
  * @author anonymous123-code
  */
 public abstract class Packet {
+    /**
+     * Der rohe Inhalt des Packets
+     */
     protected byte[] rawContent;
+    /**
+     * Die id des Packets
+     */
     protected String id;
 
+    /**
+     * Erzeugt ein Packet auf Basis des rohen Inhalts.
+     * @param content der rohe Inhalt
+     */
     public Packet(byte... content) {
         if(content.length < 3){
             throw new IllegalArgumentException("Too little bytes");
@@ -17,13 +27,26 @@ public abstract class Packet {
         id = new String(new byte[]{content[0], content[1], content[2]});
     }
 
+    /**
+     * Erzeugt ein leeres Packet.
+     */
     public Packet() {
     }
 
+    /**
+     * Gibt den rohen Inhalt zurueck.
+     *
+     * @return der rohe Inhalt
+     */
     public byte[] getRawContent() {
         return rawContent;
     }
 
+    /**
+     * Gibt die PacketId zurueck.
+     *
+     * @return die Id des Packets
+     */
     public String getId(){
         return id;
     }
