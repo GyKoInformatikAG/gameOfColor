@@ -22,12 +22,12 @@ Welche "Fenster" gibt es und wie hängen sie zusammen?
 
 Fenster
 -------
-* HAUPTFENSTER: Hier läuft das eigentliche Spiel ab
-* VERBINDEN: Dialog, um sich mit dem Server zu verbinden.
+* ConnectingDialog: Dialog, um sich mit dem Server zu verbinden.
+* MainWindow: Hier läuft das eigentliche Spiel ab
 
 Entwurf der GUI-Elemente auf den Fenstern.
 
-HAUPTFENSTER
+MainWindow
 ------------
 * Bereich, in den man hineinklicken kann und bei dem dann ein Kästchen in der Spielerfarbe gesetzt wird. (Spielfeld)
 * Liste mit den Spielernamen und welche Farbe die haben
@@ -36,8 +36,8 @@ HAUPTFENSTER
 * Buttons:
     * Spiel beenden
 
-VERBINDEN
---------
+ConnectingDialog
+----------------
 * Auswahlmöglichkeit, ob man ein Spiel für andere starten möchte, oder ob man an einem Spiel teilnehmen möchte.
 * Farbauswahl(Initialzustand zufällig)
 * Konfigurationsmöglichkeiten für das Spiel:

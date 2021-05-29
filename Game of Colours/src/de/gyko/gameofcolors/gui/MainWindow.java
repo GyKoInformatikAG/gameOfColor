@@ -11,8 +11,8 @@ import javax.swing.JPanel;
  *
  */
 @SuppressWarnings("serial")
-public class Hauptfenster extends JFrame {
-	public Hauptfenster() {
+public class MainWindow extends JFrame {
+	public MainWindow() {
 		
 		JPanel panel = new PlayingSurface();
 		getContentPane().add(panel, BorderLayout.CENTER);

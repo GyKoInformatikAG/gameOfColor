@@ -1,4 +1,4 @@
-package de.gyko.gameofcolors.gui.test;
+package de.gyko.gameofcolors.gui;
 
 public class BattlefieldTest {
 	

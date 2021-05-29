@@ -1,4 +1,4 @@
-package de.gyko.gameofcolors.app.test;
+package de.gyko.gameofcolors.app;
 
 import java.awt.Color;
 

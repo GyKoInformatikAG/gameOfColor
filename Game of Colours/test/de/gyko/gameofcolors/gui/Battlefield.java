@@ -1,4 +1,4 @@
-package de.gyko.gameofcolors.gui.test;
+package de.gyko.gameofcolors.gui;
 
 import javax.swing.JPanel;
 
