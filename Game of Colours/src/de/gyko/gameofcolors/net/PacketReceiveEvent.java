@@ -21,12 +21,13 @@ public class PacketReceiveEvent {
     /**
      * Der Wert, den die ClientId annimmt, der Sender des Packets der Server war
      */
-    public static final int CLIENT_ID_IS_SERVER = Integer.MIN_VALUE+1;
+    public static final int CLIENT_ID_IS_SERVER = Integer.MIN_VALUE + 1;
 
     /**
      * Erstellt ein neues PacketReceiveEvent auf Basis von Id des Clients und des Packets.
+     *
      * @param clientId die Id des Clients
-     * @param packet das Packet
+     * @param packet   das Packet
      */
     public PacketReceiveEvent(int clientId, Packet packet) {
         this.clientId = clientId;
@@ -35,6 +36,7 @@ public class PacketReceiveEvent {
 
     /**
      * Gibt die Id des Clients zurueck.
+     *
      * @return die Id des Clients
      */
     public int getClientId() {
@@ -43,6 +45,7 @@ public class PacketReceiveEvent {
 
     /**
      * Setzt die Id des Clients
+     *
      * @param clientId die neue Id des Clients
      */
     public void setClientId(int clientId) {
@@ -51,6 +54,7 @@ public class PacketReceiveEvent {
 
     /**
      * Gibt das empfangene Packet zurueck.
+     *
      * @return das empfangene Packet
      */
     public Packet getPacket() {
@@ -59,6 +63,7 @@ public class PacketReceiveEvent {
 
     /**
      * Setzt das empfangene Packet
+     *
      * @param packet das neue empfangene Packet
      */
     public void setPacket(Packet packet) {

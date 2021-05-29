@@ -12,5 +12,5 @@ public abstract class PacketReceiveListener {
      * @param p das PacketReceiveEvent
      * @return die Reaktionen  auf das Packet, sollten vom Aufrufer verarbeitet werden
      */
-    public abstract PacketSendRequest[] onPacketReceived (PacketReceiveEvent p);
+    public abstract PacketSendRequest[] onPacketReceived(PacketReceiveEvent p);
 }

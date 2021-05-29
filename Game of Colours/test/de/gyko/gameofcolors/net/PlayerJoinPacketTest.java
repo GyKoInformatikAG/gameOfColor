@@ -16,12 +16,12 @@ class PlayerJoinPacketTest {
 
     @Test
     void getPlayerColor() {
-        assertEquals(new PlayerJoinPacket("Otto", new Color(255,255,255)).getPlayerColor(), new Color(255,255,255));
+        assertEquals(new PlayerJoinPacket("Otto", new Color(255, 255, 255)).getPlayerColor(), new Color(255, 255, 255));
     }
 
     @Test
     void getPlayerName() {
-        assertEquals(new PlayerJoinPacket("Otto", new Color(255,255,255)).getPlayerName(), "Otto");
+        assertEquals(new PlayerJoinPacket("Otto", new Color(255, 255, 255)).getPlayerName(), "Otto");
     }
 
     @Test
@@ -59,17 +59,17 @@ class PlayerJoinPacketTest {
         PlayerJoinPacket playerJoinPacket1 = new PlayerJoinPacket(Utility.toBytes(0x70, 0x6c, 0x6a, 0x04, 0x4a, 0x61, 0x6e, 0x6f, 0x00, 0x00, 0x00));
         assertEquals("plj", playerJoinPacket1.getId());
         assertEquals("anonymous123-code", playerJoinPacket1.getPlayerName());
-        assertEquals(new Color(0,0,0), playerJoinPacket1.getPlayerColor());
+        assertEquals(new Color(0, 0, 0), playerJoinPacket1.getPlayerColor());
 
         playerJoinPacket1 = new PlayerJoinPacket(Utility.toBytes(0x70, 0x6c, 0x6a, 0x0f, 0x4d, 0x65, 0x69, 0x6e, 0x4e, 0x61, 0x6d, 0x65, 0x49, 0x73, 0x74, 0x4f, 0x74, 0x74, 0x6f, 0xff, 0x00, 0x00));
         assertEquals("plj", playerJoinPacket1.getId());
         assertEquals("MeinNameIstOtto", playerJoinPacket1.getPlayerName());
-        assertEquals(new Color(0xff,0,0), playerJoinPacket1.getPlayerColor());
+        assertEquals(new Color(0xff, 0, 0), playerJoinPacket1.getPlayerColor());
 
         playerJoinPacket1 = new PlayerJoinPacket(Utility.toBytes(0x70, 0x6c, 0x6a, 0x0f, 0x4d, 0x65, 0x69, 0x6e, 0x4e, 0x61, 0x6d, 0x65, 0x49, 0x73, 0x74, 0x4f, 0x74, 0x74, 0x6f, 0xff, 0xff, 0xff));
         assertEquals("plj", playerJoinPacket1.getId());
         assertEquals("MeinNameIstOtto", playerJoinPacket1.getPlayerName());
-        assertEquals(new Color(0xff,0xff,0xff), playerJoinPacket1.getPlayerColor());
+        assertEquals(new Color(0xff, 0xff, 0xff), playerJoinPacket1.getPlayerColor());
     }
 }
 

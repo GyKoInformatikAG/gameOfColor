@@ -1,8 +1,11 @@
 package de.gyko.gameofcolors.net;
 
-import java.util.*;
-
 import de.gyko.gameofcolors.net.PacketSendRequest.Target;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Ein Server fuer Testzwecke
@@ -10,7 +13,7 @@ import de.gyko.gameofcolors.net.PacketSendRequest.Target;
  * @author anonymous123-code
  */
 public class Testserver {
-    public static void main(String... args){
+    public static void main(String... args) {
         new Server(new PacketReceiveListener() {
             Map<String, String> map = Collections.synchronizedMap(new HashMap<>());
 
@@ -21,7 +24,7 @@ public class Testserver {
                     String input = ((TextPacket) p.getPacket()).getText();
                     String[] inputSplit = input.split(" ");
                     if (inputSplit.length < 2) {
-                        requests.add(new PacketSendRequest(Target.ALL_EXCEPT_CALLER, new TextPacket(input+'\n')));
+                        requests.add(new PacketSendRequest(Target.ALL_EXCEPT_CALLER, new TextPacket(input + '\n')));
                     } else if (inputSplit[0].equalsIgnoreCase("set")) {
                         if (inputSplit.length == 2) {
                             map.remove(inputSplit[1]);
@@ -33,7 +36,7 @@ public class Testserver {
                         result = result != null ? result : "ERROR: Key not found" + '\n';
                         requests.add(new PacketSendRequest(Target.CALLER, new TextPacket(result)));
                     } else {
-                        requests.add(new PacketSendRequest(Target.ALL_EXCEPT_CALLER, new TextPacket(input+'\n')));
+                        requests.add(new PacketSendRequest(Target.ALL_EXCEPT_CALLER, new TextPacket(input + '\n')));
                     }
                 }
 
@@ -44,6 +47,6 @@ public class Testserver {
                 }
                 return result;
             }
-        },6000);
+        }, 6000);
     }
 }

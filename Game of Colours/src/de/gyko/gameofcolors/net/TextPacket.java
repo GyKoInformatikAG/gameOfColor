@@ -7,7 +7,7 @@ import java.nio.charset.StandardCharsets;
  *
  * @author anonymous123-code
  */
-public class TextPacket extends Packet{
+public class TextPacket extends Packet {
     String text;
 
     /**
@@ -19,7 +19,7 @@ public class TextPacket extends Packet{
         super();
         // TODO: aktuell nur fuer Testzwecke, richtig machen
         this.text = text;
-        byte[] rawContent = new byte[3+text.getBytes(StandardCharsets.UTF_8).length];
+        byte[] rawContent = new byte[3 + text.getBytes(StandardCharsets.UTF_8).length];
         rawContent[0] = "txt".getBytes(StandardCharsets.UTF_8)[0];
         rawContent[1] = "txt".getBytes(StandardCharsets.UTF_8)[1];
         rawContent[2] = "txt".getBytes(StandardCharsets.UTF_8)[2];
@@ -31,18 +31,20 @@ public class TextPacket extends Packet{
 
     /**
      * Gibt den rohen Inhalt des Packets zurueck.
+     *
      * @return den rohe Inhalt
      */
     @Override
     public byte[] getRawContent() {
         // TODO: Workaround fuer Testzwecke, Spaeter entfernen
-        byte[] out = new byte[this.rawContent.length-3];
-        System.arraycopy(this.rawContent, 3, out, 0, this.rawContent.length-3);
+        byte[] out = new byte[this.rawContent.length - 3];
+        System.arraycopy(this.rawContent, 3, out, 0, this.rawContent.length - 3);
         return out;
     }
 
     /**
      * Gibt den Text des Packets zurueck.
+     *
      * @return den Text
      */
     public String getText() {

@@ -12,7 +12,7 @@ import java.util.Scanner;
  *
  * @author anonymous123-code
  */
-public class ServerThread implements Runnable{
+public class ServerThread implements Runnable {
 
     private final Socket socket;
     private boolean closed = false;
@@ -22,11 +22,12 @@ public class ServerThread implements Runnable{
 
     /**
      * Erstellt einen neuen ServerThread.
-     * @param socket der zu handelnde socket
+     *
+     * @param socket                der zu handelnde socket
      * @param packetReceiveListener der PacketReceiveListener, der bei Empfang aufgerufen wird.
-     * @param channels Die Ausgabekanaele
+     * @param channels              Die Ausgabekanaele
      */
-    public ServerThread(Socket socket, PacketReceiveListener packetReceiveListener, ArrayList<OutputStream> channels){
+    public ServerThread(Socket socket, PacketReceiveListener packetReceiveListener, ArrayList<OutputStream> channels) {
         this.socket = socket;
         this.packetReceiveListener = packetReceiveListener;
         this.channels = channels;
@@ -40,7 +41,7 @@ public class ServerThread implements Runnable{
         try (OutputStream out = socket.getOutputStream();
              InputStream in = socket.getInputStream();
              Scanner scanner = new Scanner(in, "UTF-8")
-        ){
+        ) {
             channels.add(out);
             while (!closed) {
                 //TODO: Packets richtig parsen
@@ -48,13 +49,13 @@ public class ServerThread implements Runnable{
                 String input = scanner.nextLine();
 
                 PacketReceiveEvent event = new PacketReceiveEvent(clientId, new TextPacket(input));
-                synchronized (packetReceiveListener){
+                synchronized (packetReceiveListener) {
                     PacketSendRequest[] requests = packetReceiveListener.onPacketReceived(event);
                     clientId = event.getClientId();
-                    for (PacketSendRequest request: requests) {
-                        switch (request.getTarget()){
+                    for (PacketSendRequest request : requests) {
+                        switch (request.getTarget()) {
                             case ALL:
-                                for (OutputStream stream: channels) {
+                                for (OutputStream stream : channels) {
                                     stream.write(request.getPacket().getRawContent());
                                     stream.flush();
                                 }
@@ -64,7 +65,7 @@ public class ServerThread implements Runnable{
                                 out.flush();
                                 break;
                             case ALL_EXCEPT_CALLER:
-                                for (OutputStream stream: channels) {
+                                for (OutputStream stream : channels) {
                                     if (stream != out) {
                                         stream.write(request.getPacket().getRawContent());
                                         stream.flush();
@@ -80,7 +81,8 @@ public class ServerThread implements Runnable{
         } finally {
             try {
                 socket.close();
-            } catch (IOException ignored) {}
+            } catch (IOException ignored) {
+            }
         }
     }
 }

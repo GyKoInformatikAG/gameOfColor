@@ -6,7 +6,7 @@ package de.gyko.gameofcolors;
  * @author anonymous123-code
  */
 public class Utility {
-    public static byte[] toBytes(short... shorts){
+    public static byte[] toBytes(short... shorts) {
         byte[] result = new byte[shorts.length];
         for (int i = 0; i < shorts.length; i++) {
             result[i] = (byte) shorts[i];
@@ -14,7 +14,7 @@ public class Utility {
         return result;
     }
 
-    public static byte[] toBytes(int... ints){
+    public static byte[] toBytes(int... ints) {
         byte[] result = new byte[ints.length];
         for (int i = 0; i < ints.length; i++) {
             result[i] = (byte) ints[i];
@@ -22,7 +22,7 @@ public class Utility {
         return result;
     }
 
-    public static int uint(byte b){
+    public static int uint(byte b) {
         return Byte.toUnsignedInt(b);
     }
 }

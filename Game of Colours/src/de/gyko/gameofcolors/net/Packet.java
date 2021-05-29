@@ -17,10 +17,11 @@ public abstract class Packet {
 
     /**
      * Erzeugt ein Packet auf Basis des rohen Inhalts.
+     *
      * @param content der rohe Inhalt
      */
     public Packet(byte... content) {
-        if(content.length < 3){
+        if (content.length < 3) {
             throw new IllegalArgumentException("Too little bytes");
         }
         rawContent = content;
@@ -47,7 +48,7 @@ public abstract class Packet {
      *
      * @return die Id des Packets
      */
-    public String getId(){
+    public String getId() {
         return id;
     }
 }

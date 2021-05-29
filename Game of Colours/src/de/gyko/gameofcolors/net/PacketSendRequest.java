@@ -26,6 +26,7 @@ public class PacketSendRequest {
 
     /**
      * Erstellt einen neuen Packet SendRequest.
+     *
      * @param target das Ziel des Packets
      * @param packet das Packet
      */
@@ -36,6 +37,7 @@ public class PacketSendRequest {
 
     /**
      * Gibt das Ziel des Packets zurueck.
+     *
      * @return das Ziel
      */
     public Target getTarget() {
@@ -44,6 +46,7 @@ public class PacketSendRequest {
 
     /**
      * Gibt das Packet zurueck.
+     *
      * @return das Packet
      */
     public Packet getPacket() {
