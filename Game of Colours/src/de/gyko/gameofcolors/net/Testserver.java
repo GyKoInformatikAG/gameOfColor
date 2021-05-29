@@ -18,7 +18,7 @@ public class Testserver {
             Map<String, String> map = Collections.synchronizedMap(new HashMap<>());
 
             @Override
-            public PacketSendRequest[] onPacketReceived(PacketReceiveEvent p) {
+            public ArrayList<PacketSendRequest> onPacketReceived(PacketReceiveEvent p) {
                 ArrayList<PacketSendRequest> requests = new ArrayList<>();
                 if (p.getPacket() instanceof TextPacket) {
                     String input = ((TextPacket) p.getPacket()).getText();
@@ -39,13 +39,7 @@ public class Testserver {
                         requests.add(new PacketSendRequest(Target.ALL_EXCEPT_CALLER, new TextPacket(input + '\n')));
                     }
                 }
-
-                // Casten fuehrt anscheinend dazu, dass sich das Programm aufhaengt
-                PacketSendRequest[] result = new PacketSendRequest[requests.size()];
-                for (int i = 0; i < requests.size(); i++) {
-                    result[i] = requests.get(i);
-                }
-                return result;
+                return requests;
             }
         }, 6000);
     }

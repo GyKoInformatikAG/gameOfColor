@@ -50,7 +50,7 @@ public class ServerThread implements Runnable {
 
                 PacketReceiveEvent event = new PacketReceiveEvent(clientId, new TextPacket(input));
                 synchronized (packetReceiveListener) {
-                    PacketSendRequest[] requests = packetReceiveListener.onPacketReceived(event);
+                    ArrayList<PacketSendRequest> requests = packetReceiveListener.onPacketReceived(event);
                     clientId = event.getClientId();
                     for (PacketSendRequest request : requests) {
                         switch (request.getTarget()) {

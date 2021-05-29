@@ -1,5 +1,8 @@
 package de.gyko.gameofcolors.net;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 /**
  * Ein Listener der auf das Empfangen eines Packets reagiert.
  *
@@ -12,5 +15,5 @@ public abstract class PacketReceiveListener {
      * @param p das PacketReceiveEvent
      * @return die Reaktionen  auf das Packet, sollten vom Aufrufer verarbeitet werden
      */
-    public abstract PacketSendRequest[] onPacketReceived(PacketReceiveEvent p);
+    public abstract ArrayList<PacketSendRequest> onPacketReceived(PacketReceiveEvent p);
 }
