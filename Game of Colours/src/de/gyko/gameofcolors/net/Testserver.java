@@ -1,0 +1,49 @@
+package de.gyko.gameofcolors.net;
+
+import java.util.*;
+
+import de.gyko.gameofcolors.net.PacketSendRequest.Target;
+
+/**
+ * Ein Server fuer Testzwecke
+ *
+ * @author anonymous123-code
+ */
+public class Testserver {
+    public static void main(String... args){
+        new Server(new PacketReceiveListener() {
+            Map<String, String> map = Collections.synchronizedMap(new HashMap<>());
+
+            @Override
+            public PacketSendRequest[] onPacketReceived(PacketReceiveEvent p) {
+                ArrayList<PacketSendRequest> requests = new ArrayList<>();
+                if (p.getPacket() instanceof TextPacket) {
+                    String input = ((TextPacket) p.getPacket()).getText();
+                    String[] inputSplit = input.split(" ");
+                    if (inputSplit.length < 2) {
+                        requests.add(new PacketSendRequest(Target.ALL_EXCEPT_CALLER, new TextPacket(input+'\n')));
+                    } else if (inputSplit[0].equalsIgnoreCase("set")) {
+                        if (inputSplit.length == 2) {
+                            map.remove(inputSplit[1]);
+                        } else {
+                            map.put(inputSplit[1], input.substring(inputSplit[0].length() + inputSplit[1].length() + 2));
+                        }
+                    } else if (inputSplit[0].equalsIgnoreCase("get")) {
+                        String result = map.get(inputSplit[1]);
+                        result = result != null ? result : "ERROR: Key not found" + '\n';
+                        requests.add(new PacketSendRequest(Target.CALLER, new TextPacket(result)));
+                    } else {
+                        requests.add(new PacketSendRequest(Target.ALL_EXCEPT_CALLER, new TextPacket(input+'\n')));
+                    }
+                }
+
+                // Casten fuehrt anscheinend dazu, dass sich das Programm aufhaengt
+                PacketSendRequest[] result = new PacketSendRequest[requests.size()];
+                for (int i = 0; i < requests.size(); i++) {
+                    result[i] = requests.get(i);
+                }
+                return result;
+            }
+        },6000);
+    }
+}
