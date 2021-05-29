@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import de.gyko.gameofcolors.app.Battlefield;
 import de.gyko.gameofcolors.app.GameOfColors;
 import de.gyko.gameofcolors.gui.MainWindow;
 
@@ -32,8 +33,8 @@ public class Starter {
 	private void run() {
 		initializeApplication();
 		initializeNet();
-//		createAndShowConnectingDialog();
 		GameOfColors newGame = createGame();
+//		createAndShowConnectingDialog(newGame);
 		createAndShowMainWindow(newGame);
 	}
 
@@ -53,10 +54,12 @@ public class Starter {
 	}
 
 	/**
-	 * Erzeugt ein neues Spiel mit den Parametern, die im ConnectionDialog dafür angegeben waren.
+	 * Erzeugt ein neues Spiel
 	 */
-	private GameOfColors createGame(/* Spielparameter */) {
+	private GameOfColors createGame() {
 		GameOfColors gameOfColors = new GameOfColors();
+		Battlefield theBattlefield = new Battlefield();
+		gameOfColors.setBattlefield(theBattlefield);
 		return gameOfColors;
 	}
 	
