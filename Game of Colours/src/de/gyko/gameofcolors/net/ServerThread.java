@@ -1,19 +1,14 @@
 package de.gyko.gameofcolors.net;
 
-import java.awt.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.net.Socket;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.Scanner;
-import java.util.concurrent.locks.Lock;
 
-/*
- * A Thread wich handles on server <-> client connection
+/**
+ * Ein Thread der die Server <-> Client Connection handelt.
  *
  * @author anonymous123-code
  */
@@ -24,21 +19,27 @@ public class ServerThread implements Runnable{
     private int clientId = PacketReceiveEvent.CLIENT_ID_NOT_INITIALIZED;
     private final PacketReceiveListener packetReceiveListener;
     private ArrayList<OutputStream> channels;
-    Map<String, String> map;
 
-    public ServerThread(Socket socket, PacketReceiveListener packetReceiveListener, ArrayList<OutputStream> channels, Map<String, String> map){
+    /**
+     * Erstellt einen neuen ServerThread.
+     * @param socket der zu handelnde socket
+     * @param packetReceiveListener der PacketReceiveListener, der bei Empfang aufgerufen wird.
+     * @param channels Die Ausgabekanaele
+     */
+    public ServerThread(Socket socket, PacketReceiveListener packetReceiveListener, ArrayList<OutputStream> channels){
         this.socket = socket;
         this.packetReceiveListener = packetReceiveListener;
-        this.map = map;
         this.channels = channels;
     }
 
+    /**
+     * Fuehrt den Thread aus. (Nicht aufrufen!)
+     */
     @Override
     public void run() {
         try (OutputStream out = socket.getOutputStream();
              InputStream in = socket.getInputStream();
-             PrintWriter outputStreamWriter = new PrintWriter(out, true);
-             Scanner scanner = new Scanner(in, StandardCharsets.UTF_8)
+             Scanner scanner = new Scanner(in, "UTF-8")
         ){
             channels.add(out);
             while (!closed) {
@@ -52,42 +53,26 @@ public class ServerThread implements Runnable{
                     clientId = event.getClientId();
                     for (PacketSendRequest request: requests) {
                         switch (request.getTarget()){
-                            case ALL -> {
+                            case ALL:
                                 for (OutputStream stream: channels) {
                                     stream.write(request.getPacket().getRawContent());
                                     stream.flush();
                                 }
-                            }
-                            case CALLER -> {
+                                break;
+                            case CALLER:
                                 out.write(request.getPacket().getRawContent());
                                 out.flush();
-                            }
-                            case ALL_EXCEPT_CALLER -> {
+                                break;
+                            case ALL_EXCEPT_CALLER:
                                 for (OutputStream stream: channels) {
                                     if (stream != out) {
                                         stream.write(request.getPacket().getRawContent());
                                         stream.flush();
                                     }
                                 }
-                            }
+                                break;
                         }
                     }
-                }
-
-                // TODO: Noch zum testen, Später löschen(bzw umziehen)
-                String[] inputSplit = input.split(" ");
-                if(inputSplit.length < 2){
-                    outputStreamWriter.println(input);
-                } else if (inputSplit[0].equalsIgnoreCase("set")) {
-                    if (inputSplit.length == 2){
-                        map.remove(inputSplit[1]);
-                        Color c = new Color(0x36393f);
-                    } else {
-                        map.put(inputSplit[1], input.substring(inputSplit[0].length()+inputSplit[1].length()+2));
-                    }
-                } else if (inputSplit[0].equalsIgnoreCase("get")){
-                    String result = map.get(inputSplit[1]);
-                    outputStreamWriter.println(result!=null?result:"ERROR: Key not found");
                 }
             }
         } catch (IOException e) {
