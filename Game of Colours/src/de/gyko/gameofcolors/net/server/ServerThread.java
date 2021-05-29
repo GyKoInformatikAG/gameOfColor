@@ -1,4 +1,9 @@
-package de.gyko.gameofcolors.net;
+package de.gyko.gameofcolors.net.server;
+
+import de.gyko.gameofcolors.net.PacketReceiveEvent;
+import de.gyko.gameofcolors.net.PacketReceiveListener;
+import de.gyko.gameofcolors.net.PacketSendRequest;
+import de.gyko.gameofcolors.net.TextPacket;
 
 import java.io.IOException;
 import java.io.InputStream;
