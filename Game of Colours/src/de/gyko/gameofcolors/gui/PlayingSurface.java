@@ -1,6 +1,7 @@
 package de.gyko.gameofcolors.gui;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -28,6 +29,12 @@ public class PlayingSurface extends JPanel {
 		//TODO
 		
 	setBackground(Color.BLUE);
+	}
+
+	@Override
+	protected void paintComponent(Graphics g) {
+		// TODO Auto-generated method stub
+		super.paintComponent(g);
 	}
 
 }

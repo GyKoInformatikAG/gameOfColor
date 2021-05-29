@@ -16,6 +16,7 @@ public class MainWindow extends JFrame {
 		
 		JPanel panel = new PlayingSurface();
 		getContentPane().add(panel, BorderLayout.CENTER);
+		setBounds(100, 100, 900, 700);
 	}
 
 }
