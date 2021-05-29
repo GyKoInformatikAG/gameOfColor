@@ -23,38 +23,38 @@ public class Battlefield {
    /**
     * Die Höhe des Battlefields in der Einheit Anzahl Kästchen.
     */
-   public String height = "";
+   private int height = 0;
    
    /**
     * @return the height
     */
-   public String getHieght() {
+   public int getHeight() {
 	   return height;
    }
    
    /**
     * @param height the height to set
     */
-   public void setHeight(String height ) {
+   public void setHeight(int height ) {
 	   this.height = height;
    }
    
    /**
     * Die Weite des Battlefields in der Einheit Anzahl Kästchen.
     */
-   public String width = "";
+   private int width = 0;
    
    /**
     * @return the width
     */
-   public String getWidth() {
+   public int getWidth() {
 	   return width;
    }
    
    /**
     * @param width the width to set
     */
-   public void setWidth (String width ) {
+   public void setWidth (int width ) {
 	   this.width = width;
    }
    
