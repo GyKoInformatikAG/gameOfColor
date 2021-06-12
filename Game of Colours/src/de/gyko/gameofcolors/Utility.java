@@ -1,6 +1,6 @@
 package de.gyko.gameofcolors;
 
-/*
+/**
  * Some Helper Methods
  *
  * @author anonymous123-code
