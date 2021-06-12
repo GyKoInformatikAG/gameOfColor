@@ -11,6 +11,7 @@ import static de.gyko.gameofcolors.Utility.uint;
  * @author anonymous123-code
  */
 public class PlayerJoinPacket extends Packet {
+    public static final String packetId = "txt";
     /**
      * Der Name des Spielers
      */
@@ -28,7 +29,7 @@ public class PlayerJoinPacket extends Packet {
      */
     public PlayerJoinPacket(byte... content) throws IllegalArgumentException {
         super(content);
-        if (!id.equals("plj")) throw new IllegalArgumentException("wrong packetId");
+        if (!id.equals(packetId)) throw new IllegalArgumentException("wrong packetId");
         if (content.length < 7) {
             throw new IllegalArgumentException("too little bytes");
         }
@@ -60,7 +61,7 @@ public class PlayerJoinPacket extends Packet {
     public PlayerJoinPacket(String playerName, Color playerColor) {
         this.playerColor = playerColor;
         this.playerName = playerName;
-        this.id = "plj";
+        this.id = packetId;
         this.rawContent = new byte[7 + this.playerName.length()];
         this.rawContent[0] = 0x70;
         this.rawContent[1] = 0x6c;

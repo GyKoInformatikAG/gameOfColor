@@ -9,6 +9,7 @@ import java.nio.charset.StandardCharsets;
  */
 public class TextPacket extends Packet {
     String text;
+    public static final String packetId = "txt";
 
     /**
      * Erstellt ein neues TextPacket auf Basis eines Textes.
@@ -20,9 +21,9 @@ public class TextPacket extends Packet {
         // TODO: aktuell nur fuer Testzwecke, richtig machen
         this.text = text;
         byte[] rawContent = new byte[3 + text.getBytes(StandardCharsets.UTF_8).length];
-        rawContent[0] = "txt".getBytes(StandardCharsets.UTF_8)[0];
-        rawContent[1] = "txt".getBytes(StandardCharsets.UTF_8)[1];
-        rawContent[2] = "txt".getBytes(StandardCharsets.UTF_8)[2];
+        rawContent[0] = packetId.getBytes(StandardCharsets.UTF_8)[0];
+        rawContent[1] = packetId.getBytes(StandardCharsets.UTF_8)[1];
+        rawContent[2] = packetId.getBytes(StandardCharsets.UTF_8)[2];
         byte[] sBytes = text.getBytes(StandardCharsets.UTF_8);
         System.arraycopy(sBytes, 0, rawContent, 3, sBytes.length + 3 - 3);
         this.rawContent = rawContent;
