@@ -86,8 +86,7 @@ public class ServerThread implements Runnable {
         } finally {
             try {
                 socket.close();
-            } catch (IOException ignored) {
-            }
+            } catch (IOException ignored) {}
         }
     }
 }
