@@ -19,16 +19,19 @@ import java.util.Scanner;
 public class Client implements Runnable, Closeable {
 
     private final PacketReceiveListener packetReceiveListener;
-    int port;
+    private final int port;
+    private final InetAddress address;
+
     private boolean closed = false;
     private boolean initialized = false;
-    private final InetAddress address;
+
     private OutputStream out;
 
     /**
-     * Erstellt und initialisiert einen Server für einen bestimmten Port.
+     * Erstellt und initialisiert einen Client für einen bestimmten Port.
      *
      * @param packetReceiveListener der PacketReceiveListener, der benachrichtigt wird, wenn ein Packet empfangen wurde
+     * @param address               die Adresse zum Verbinden
      * @param port                  Port für den Server
      */
     public Client(PacketReceiveListener packetReceiveListener, InetAddress address, int port) {
@@ -39,7 +42,7 @@ public class Client implements Runnable, Closeable {
     }
 
     /**
-     * Fuehrt den Server-Thread aus. (Nicht aufrufen!)
+     * Fuehrt den Client-Thread aus. (Nicht aufrufen!)
      */
     @Override
     public void run() {
@@ -77,10 +80,18 @@ public class Client implements Runnable, Closeable {
 
     }
 
+    /**
+     * Schließt den Client
+     */
     public void close(){
         this.closed = true;
     }
 
+    /**
+     * Sendet ein Packet
+     * @param p das zu sendende Packet
+     * @throws IllegalStateException wenn der Client noch nicht fertig initialisiert wurde
+     */
     public void sendPacket(Packet p)  {
         if (!initialized) throw new IllegalStateException("Not initialized");
         try {
