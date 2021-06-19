@@ -61,7 +61,7 @@ public class Client implements Runnable, Closeable {
                 PacketReceiveEvent event = new PacketReceiveEvent(PacketReceiveEvent.CLIENT_ID_IS_SERVER, new TextPacket(input));
                 synchronized (packetReceiveListener) {
                     ArrayList<PacketSendRequest> requests = packetReceiveListener.onPacketReceived(event);
-                    for (PacketSendRequest request : requests) {
+                    if (requests != null) for (PacketSendRequest request : requests) {
                         switch (request.getTarget()) {
                             case ALL:
                             case CALLER:
@@ -96,6 +96,8 @@ public class Client implements Runnable, Closeable {
         if (!initialized) throw new IllegalStateException("Not initialized");
         try {
             out.write(p.getRawContent());
+            out.flush();
+            System.out.println("sent");
         } catch (IOException e) {
             e.printStackTrace();
         }
