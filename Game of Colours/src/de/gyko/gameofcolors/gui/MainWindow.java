@@ -26,14 +26,16 @@ public class MainWindow extends JFrame {
 		setBounds(100, 100, 900, 700);
 	}
 
-//TODO Warum tritt hier beim Ausführen von MainWindowtest ein Fehler auf?
+	//TODO Warum tritt hier beim Ausführen von MainWindowtest ein Fehler auf?
 	//MainWindow MainWindowObject = new MainWindow();
 
 	public MainWindow(GameOfColors Game) {
 		this();
-		
+
 		//TODO Kontrolle
 		Save = Game;
+
+
 
 	}
 
