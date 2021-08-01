@@ -49,7 +49,7 @@ public class Starter {
 	 * Initialisiert die Netzwerkschicht
 	 */
 	private void initializeNet() {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub.
 		
 	}
 
