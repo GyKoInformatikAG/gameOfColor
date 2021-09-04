@@ -27,6 +27,7 @@ public class Battlefield {
     * @return
     */
    public Color getColorAt(int x, int y) {
+	   return Color.BLUE;
    }
    
    

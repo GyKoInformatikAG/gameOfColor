@@ -21,7 +21,7 @@ public class MainWindowTest extends JFrame {
 			public void run() {
 				try {
 					//MainWindow frame = new MainWindow();                  // Barnabas: diese Methode auskommentieren
-					MainWindow frame = new MainWindow(	einTestSpiel	); // Barnabas: diese Methode einkommentieren.
+					MainWindow frame = new MainWindow(einTestSpiel); // Barnabas: diese Methode einkommentieren.
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
