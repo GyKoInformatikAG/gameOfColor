@@ -9,6 +9,8 @@ import java.awt.Color;
  *
  */
 public class Battlefield {
+	
+	private Color[][]color=new Color[10][10];
 
 	/**
 	 * Diese Methode setzt auf die Koordinate die Farbe.
@@ -17,6 +19,8 @@ public class Battlefield {
 	 * @param color
 	 */
    public void setColorAt(int x, int y, Color color){	
+	   
+	   this.color[x][y]= color;
 	}
    
    /**
@@ -27,7 +31,7 @@ public class Battlefield {
     * @return
     */
    public Color getColorAt(int x, int y) {
-	   return Color.BLUE;
+	   return color[x][y];
    }
    
    
