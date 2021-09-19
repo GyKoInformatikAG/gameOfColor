@@ -25,7 +25,7 @@ public class TextPacket extends Packet {
         rawContent[1] = packetId.getBytes(StandardCharsets.UTF_8)[1];
         rawContent[2] = packetId.getBytes(StandardCharsets.UTF_8)[2];
         byte[] sBytes = text.getBytes(StandardCharsets.UTF_8);
-        System.arraycopy(sBytes, 0, rawContent, 3, sBytes.length + 3 - 3);
+        System.arraycopy(sBytes, 0, rawContent, 3, sBytes.length);
         this.rawContent = rawContent;
         id = new String(new byte[]{rawContent[0], rawContent[1], rawContent[2]});
     }
