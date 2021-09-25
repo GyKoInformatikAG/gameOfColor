@@ -16,25 +16,24 @@ import de.gyko.gameofcolors.app.GameOfColors;
 @SuppressWarnings("serial")
 public class MainWindow extends JFrame {
 
-	
-	private GameOfColors game;
 
+	private GameOfColors game;
+	
+	
+	public MainWindow(GameOfColors game) {
+		this();
+		
+		this.game = game;
+	}
+	
 	public MainWindow() {
 
-		JPanel panel = new PlayingSurface();
+		JPanel panel = new PlayingSurface(game.getBattlefield());
 		getContentPane().add(panel, BorderLayout.CENTER);
 		setBounds(100, 100, 900, 700);
 	}
 
-	public MainWindow(GameOfColors Game) {
-		this();
 
-		//TODO Kontrolle
-		game = Game;
-
-
-
-	}
 
 }
 

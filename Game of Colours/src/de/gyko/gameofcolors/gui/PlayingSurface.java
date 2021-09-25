@@ -4,8 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
 import javax.swing.JPanel;
+import de.gyko.gameofcolors.app.Battlefield;
 
 /**
  * 
@@ -15,6 +15,9 @@ import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
 public class PlayingSurface extends JPanel {
+
+	private Battlefield field;
+
 
 	/**
 	 * Create the frame.
@@ -27,14 +30,21 @@ public class PlayingSurface extends JPanel {
 			}
 		});
 		//TODO
-		
-	setBackground(Color.BLUE);
+
+		setBackground(Color.BLUE);
 	}
 
 	@Override
 	protected void paintComponent(Graphics g) {
 		// TODO Auto-generated method stub
 		super.paintComponent(g);
+	}
+
+
+	public PlayingSurface(Battlefield field) {
+		this();
+
+		this.field=field;
 	}
 
 }
