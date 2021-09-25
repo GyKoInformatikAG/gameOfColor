@@ -6,10 +6,7 @@ import de.gyko.gameofcolors.net.PacketSendRequest;
 import de.gyko.gameofcolors.net.PacketSendRequest.Target;
 import de.gyko.gameofcolors.net.TextPacket;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Ein Server fuer Testzwecke
