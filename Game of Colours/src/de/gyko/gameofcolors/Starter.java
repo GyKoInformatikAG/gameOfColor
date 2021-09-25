@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import de.gyko.gameofcolors.app.Battlefield;
 import de.gyko.gameofcolors.app.GameOfColors;
 import de.gyko.gameofcolors.gui.MainWindow;
+import de.gyko.gameofcolors.net.client.Client;
 
 /**
  * Diese Klasse startet das Spiel.
@@ -49,7 +50,7 @@ public class Starter {
 	 * Initialisiert die Netzwerkschicht
 	 */
 	private void initializeNet() {
-		// TODO Auto-generated method stub.
+		// TODO Auto-generated method stub
 		
 	}
 
@@ -57,7 +58,9 @@ public class Starter {
 	 * Erzeugt ein neues Spiel
 	 */
 	private GameOfColors createGame() {
+		Client client = new Client(null, null, 0); // TODO 
 		GameOfColors gameOfColors = new GameOfColors();
+		gameOfColors.setClient(client);
 		Battlefield theBattlefield = new Battlefield();
 		gameOfColors.setBattlefield(theBattlefield);
 		return gameOfColors;
