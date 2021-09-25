@@ -35,7 +35,8 @@ public class TestClient {
                 in.nextLine();
                 while (true) {
                     String line = in.nextLine();
-                    client.sendPacket(new TextPacket(line));
+                    if (line.equalsIgnoreCase("-!exit")) break;
+                    client.sendPacket(new TextPacket(line + '\n'));
                 }
             } catch (UnknownHostException e) {
                 e.printStackTrace();

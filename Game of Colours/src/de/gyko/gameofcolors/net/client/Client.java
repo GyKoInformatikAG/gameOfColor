@@ -23,7 +23,6 @@ public class Client implements Runnable, Closeable {
     private final InetAddress address;
 
     private boolean closed = false;
-    private boolean initialized = false;
 
     private final Queue<Packet> toWrite = new ConcurrentLinkedQueue<>();
 
@@ -53,7 +52,6 @@ public class Client implements Runnable, Closeable {
              InputStream in = socket.getInputStream();
              Scanner scanner = new Scanner(in, "UTF-8")) {
             System.out.println("Ready");
-            this.initialized = true;
             this.out = out;
             while (!closed) {
                 while (toWrite.peek() != null){
