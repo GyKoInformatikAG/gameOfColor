@@ -16,7 +16,7 @@ import java.util.*;
 public class Testserver {
     public static void main(String... args) {
         new Server(new PacketReceiveListener() {
-            Map<String, String> map = Collections.synchronizedMap(new HashMap<>());
+            final Map<String, String> map = Collections.synchronizedMap(new HashMap<>());
 
             @Override
             public ArrayList<PacketSendRequest> onPacketReceived(PacketReceiveEvent p) {
@@ -33,8 +33,9 @@ public class Testserver {
                             map.put(inputSplit[1], input.substring(inputSplit[0].length() + inputSplit[1].length() + 2));
                         }
                     } else if (inputSplit[0].equalsIgnoreCase("get")) {
+                        System.out.println(map);
                         String result = map.get(inputSplit[1]);
-                        result = result != null ? result : "ERROR: Key not found" + '\n';
+                        result = (result != null ? result : "ERROR: Key not found") + '\n';
                         requests.add(new PacketSendRequest(Target.CALLER, new TextPacket(result)));
                     } else {
                         requests.add(new PacketSendRequest(Target.ALL_EXCEPT_CALLER, new TextPacket(input + '\n')));
