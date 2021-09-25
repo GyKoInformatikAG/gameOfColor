@@ -61,7 +61,6 @@ public class Client implements Runnable, Closeable {
 
                 //TODO: Packets richtig parsen
                 if (in.available() > 0) {
-                    System.out.println("hi");
                     String input = scanner.nextLine();
 
                     PacketReceiveEvent event = new PacketReceiveEvent(PacketReceiveEvent.CLIENT_ID_IS_SERVER, new TextPacket(input));
