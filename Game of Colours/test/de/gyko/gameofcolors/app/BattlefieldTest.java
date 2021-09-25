@@ -8,7 +8,8 @@ public class BattlefieldTest {
 
 	public static void main(String[] args) {
 		
-		Battlefield einSchlachtfeld = new Battlefield();
+		GameOfColors einSpiel = null;
+		Battlefield einSchlachtfeld = new Battlefield(einSpiel);
 		
 		einSchlachtfeld.setHeight(5);
 		einSchlachtfeld.setWidth(10);

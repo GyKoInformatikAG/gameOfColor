@@ -1,21 +1,22 @@
 package de.gyko.gameofcolors.app;
 
 import de.gyko.gameofcolors.app.GameOfColors;
+import de.gyko.gameofcolors.net.client.Client;
 
 public class GameOfColorsTest {
 	
-	GameOfColors einKonkretesSpiel = new GameOfColors();
-	
-	int zahl;
 	
 	public static void main(String[] args) {
 		
-		int schuhgroesse = 42;
-		String text = "Schuhgroesse";
+		GameOfColors einKonkretesSpiel = new GameOfColors();
+
+		Client einneuerClient = new Client(null, null, 0);
 		
-		System.out.println(45);
-		System.out.println(schuhgroesse);
-		System.out.println("schuhgroesse");
+		Battlefield einneuesBattlefield = new Battlefield(einKonkretesSpiel);
+		
+		einKonkretesSpiel.setClient(einneuerClient);
+		
+		einKonkretesSpiel.setBattlefield(einneuesBattlefield);
 		
 	}
 

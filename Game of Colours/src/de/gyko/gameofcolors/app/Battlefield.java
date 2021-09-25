@@ -10,6 +10,12 @@ import java.awt.Color;
  */
 public class Battlefield {
 	
+	private GameOfColors einSpiel;
+	
+	public Battlefield (GameOfColors einSpiel) {
+		this.einSpiel  = einSpiel;
+	}
+	
 	private Color[][]color=new Color[10][10];
 
 	/**

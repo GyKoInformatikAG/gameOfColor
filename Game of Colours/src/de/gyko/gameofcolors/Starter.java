@@ -58,10 +58,11 @@ public class Starter {
 	 * Erzeugt ein neues Spiel
 	 */
 	private GameOfColors createGame() {
+		GameOfColors einSpiel = null;
 		Client client = new Client(null, null, 0); // TODO 
 		GameOfColors gameOfColors = new GameOfColors();
 		gameOfColors.setClient(client);
-		Battlefield theBattlefield = new Battlefield();
+		Battlefield theBattlefield = new Battlefield(einSpiel);
 		gameOfColors.setBattlefield(theBattlefield);
 		return gameOfColors;
 	}
