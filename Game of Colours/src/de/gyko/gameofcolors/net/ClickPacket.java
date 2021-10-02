@@ -2,6 +2,8 @@ package de.gyko.gameofcolors.net;
 
 import de.gyko.gameofcolors.app.Player;
 
+import java.awt.*;
+
 /**
  * Das Packet, dass verschickt wird, wenn auf die Spielflaeche geklickt wurde
  */
@@ -9,7 +11,7 @@ public class ClickPacket extends Packet{
     /**
      * Der Spieler, der geklickt hat
      */
-    private Player player;
+    private Color color;
     /**
      * Die X-Koordinate des Klicks
      */
@@ -24,12 +26,12 @@ public class ClickPacket extends Packet{
      * Erstellt ein ClickPacket
      * @param x X-Koordinate des Klicks
      * @param y Y-Koordinate des Klicks
-     * @param player Spieler, der geklickt hat
+     * @param color Farbe des Spielers, der geklickt hat
      */
-    public ClickPacket(int x, int y, Player player){
+    public ClickPacket(int x, int y, Color color){
         this.x = x;
         this.y = y;
-        this.player = player;
+        this.color = color;
     }
 
     /**
@@ -52,7 +54,7 @@ public class ClickPacket extends Packet{
      * Gibt den Spieler, der geklickt hat, zurueck
      * @return der Spieler
      */
-    public Player getPlayer() {
-        return player;
+    public Color getColor() {
+        return color;
     }
 }
