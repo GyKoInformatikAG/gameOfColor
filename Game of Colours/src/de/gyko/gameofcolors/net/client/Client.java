@@ -1,5 +1,6 @@
 package de.gyko.gameofcolors.net.client;
 
+import com.sun.xml.internal.bind.v2.runtime.reflect.Lister;
 import de.gyko.gameofcolors.net.*;
 
 import java.io.Closeable;
@@ -9,9 +10,12 @@ import java.io.OutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Der Client
@@ -30,6 +34,8 @@ public class Client implements Runnable, Closeable {
     private OutputStream out;
     private final Lock outLock = new ReentrantLock();
 
+    private static Logger logger = null;
+
     /**
      * Erstellt und initialisiert einen Client für einen bestimmten Port.
      *
@@ -38,6 +44,10 @@ public class Client implements Runnable, Closeable {
      * @param port                  Port für den Server
      */
     public Client(PacketReceiveListener packetReceiveListener, InetAddress address, int port) {
+        if (logger == null) {
+            logger = Logger.getLogger("de.gyko.gameofcolors.net.client");
+            logger.setLevel(Level.FINE);
+        }
         this.port = port;
         this.address = address;
         this.packetReceiveListener = packetReceiveListener;
@@ -62,13 +72,23 @@ public class Client implements Runnable, Closeable {
 
                 String input = scanner.nextLine();
 
-                PacketReceiveEvent event = new PacketReceiveEvent(PacketReceiveEvent.CLIENT_ID_IS_SERVER, new TextPacket(input));
+                Packet p = new TextPacket(input);
+                //noinspection ConstantConditions
+                if (false) p = new Packet() {};
+
+                logger.finer("Packet("+p.getId()+") empfangen");
+                logger.finest("Packet Inhalt: " + Arrays.toString(p.getRawContent()));
+                //noinspection ConstantConditions
+                if (p instanceof TextPacket) logger.finest("Packet Inhalt: " + ((TextPacket) p).getText());
+
+                PacketReceiveEvent event = new PacketReceiveEvent(PacketReceiveEvent.CLIENT_ID_IS_SERVER, p);
                 synchronized (packetReceiveListener) {
                     ArrayList<PacketSendRequest> requests = packetReceiveListener.onPacketReceived(event);
                     if (requests != null) for (PacketSendRequest request : requests) {
                         switch (request.getTarget()) {
                             case ALL:
                             case CALLER:
+                                logger.finest("PacketSendRequest");
                                 outLock.lock();
                                 try {
                                     out.write(request.getPacket().getRawContent());
