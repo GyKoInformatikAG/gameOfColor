@@ -10,6 +10,7 @@ Dabei sollen leere Kästchen gefüllt werden.
 Schon gefüllte Kästchen sollen übermalt werden.
 Die Größe des Spielfeldes richtet sich nach der Anzahl der Spieler.
 Es gibt eine Minimalanzahl von Spielern und es gibt eine Maximalanzahl von Spielern für ein Spiel.
+Das Spielfeld ist dann gewonnen, wenn einer die meisten Kästchen angeklickt hat und das SPielfeld vollständig mit Farbe besetzt ist. 
 
 
 GUI (Graphical User Interface)
