@@ -8,8 +8,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
-import java.util.*;
-import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Der Client
@@ -23,8 +23,7 @@ public class Client implements Runnable, Closeable {
     private final InetAddress address;
 
     private boolean closed = false;
-
-    private final Queue<Packet> toWrite = new ConcurrentLinkedQueue<>();
+    private boolean initialized = false;
 
     private OutputStream out;
 
@@ -51,30 +50,27 @@ public class Client implements Runnable, Closeable {
              OutputStream out = socket.getOutputStream();
              InputStream in = socket.getInputStream();
              Scanner scanner = new Scanner(in, "UTF-8")) {
+            this.initialized = true;
             System.out.println("Ready");
             this.out = out;
             while (!closed) {
-                while (toWrite.peek() != null){
-                    out.write(toWrite.poll().getRawContent());
-                    out.flush();
-                }
 
                 //TODO: Packets richtig parsen
-                if (in.available() > 0) {
-                    String input = scanner.nextLine();
 
-                    PacketReceiveEvent event = new PacketReceiveEvent(PacketReceiveEvent.CLIENT_ID_IS_SERVER, new TextPacket(input));
-                    synchronized (packetReceiveListener) {
-                        ArrayList<PacketSendRequest> requests = packetReceiveListener.onPacketReceived(event);
-                        if (requests != null) for (PacketSendRequest request : requests) {
-                            switch (request.getTarget()) {
-                                case ALL:
-                                case CALLER:
-                                    toWrite.add(request.getPacket());
-                                    break;
-                                default:
-                                    System.err.println();
-                            }
+                String input = scanner.nextLine();
+
+                PacketReceiveEvent event = new PacketReceiveEvent(PacketReceiveEvent.CLIENT_ID_IS_SERVER, new TextPacket(input));
+                synchronized (packetReceiveListener) {
+                    ArrayList<PacketSendRequest> requests = packetReceiveListener.onPacketReceived(event);
+                    if (requests != null) for (PacketSendRequest request : requests) {
+                        switch (request.getTarget()) {
+                            case ALL:
+                            case CALLER:
+                                out.write(request.getPacket().getRawContent());
+                                out.flush();
+                                break;
+                            default:
+                                System.err.println();
                         }
                     }
                 }
@@ -88,17 +84,24 @@ public class Client implements Runnable, Closeable {
     /**
      * Schließt den Client
      */
-    public void close() {
+    public void close(){
         this.closed = true;
     }
 
     /**
-     * Sendet ein Packet, sobald der socket fertig initialisiert wurde
-     *
+     * Sendet ein Packet
      * @param p das zu sendende Packet
+     * @throws IllegalStateException wenn der Client noch nicht fertig initialisiert wurde
      */
-    public void sendPacket(Packet p) {
-        toWrite.add(p);
+    public void sendPacket(Packet p)  {
+        if (!initialized) throw new IllegalStateException("Not initialized");
+        try {
+            out.write(p.getRawContent());
+            out.flush();
+            System.out.println("sent");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
