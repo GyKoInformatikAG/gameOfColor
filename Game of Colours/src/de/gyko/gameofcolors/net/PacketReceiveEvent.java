@@ -10,14 +10,17 @@ public class PacketReceiveEvent {
      * Die Id des Clients
      */
     private int clientId;
+
     /**
      * Das empfangene Packet
      */
     private Packet packet;
+
     /**
      * Der Wert, den die ClientId annimmt, wenn sie noch nicht initialisiert wurde
      */
     public static final int CLIENT_ID_NOT_INITIALIZED = Integer.MIN_VALUE;
+
     /**
      * Der Wert, den die ClientId annimmt, der Sender des Packets der Server war
      */

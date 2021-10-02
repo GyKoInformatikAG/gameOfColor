@@ -53,7 +53,7 @@ public class PlayerJoinPacket extends Packet {
     }
 
     /**
-     * Erstellt ein neues PlayerJoinPacket auf basis von Spielername und -farbe.
+     * Erstellt ein neues PlayerJoinPacket auf Basis von Spielername und -farbe.
      *
      * @param playerName  der Name des Spielers
      * @param playerColor die Farbe des Spielers

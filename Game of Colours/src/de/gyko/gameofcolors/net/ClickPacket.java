@@ -32,14 +32,26 @@ public class ClickPacket extends Packet{
         this.player = player;
     }
 
+    /**
+     * Gibt die X-Koordinate des Klicks zurueck
+     * @return Die X-Koordinate
+     */
     public int getX() {
         return x;
     }
 
+    /**
+     * Gibt die X-Koordinate des Klicks zurueck
+     * @return Die X-Koordinate
+     */
     public int getY() {
         return y;
     }
 
+    /**
+     * Gibt den Spieler, der geklickt hat, zurueck
+     * @return der Spieler
+     */
     public Player getPlayer() {
         return player;
     }
