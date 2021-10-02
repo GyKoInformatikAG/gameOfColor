@@ -1,6 +1,11 @@
 package de.gyko.gameofcolors.app;
 
+import static org.junit.Assert.assertFalse;
+
 import java.awt.Color;
+
+import de.gyko.gameofcolors.net.ClickPacket;
+import de.gyko.gameofcolors.net.Packet;
 
 /**
  * Diese Klasse stellt das Spielfeld/ Battlefield dar.
@@ -27,7 +32,12 @@ public class Battlefield {
    public void setColorAt(int x, int y, Color color){	
 	   
 	   this.color[x][y]= color;
-	}
+	   
+	   Packet p = new ClickPacket(x,y,color);
+	   
+
+	   einSpiel.getClient().sendPacket(p);
+   }
    
    /**
     * Diese Methode liefert die Farbe zurück, die das 
@@ -79,5 +89,14 @@ public class Battlefield {
 	   this.width = width;
    }
    
-   
+   /**
+    * Die Methose gibt true zurück, wenn das Spielfeld komplett belegt ist.
+    * @return
+    */
+		   
+   public boolean finished() {
+
+	   return false;
+	   
+   }
 }

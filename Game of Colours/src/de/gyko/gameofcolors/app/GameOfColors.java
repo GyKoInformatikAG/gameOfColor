@@ -11,7 +11,7 @@ import de.gyko.gameofcolors.net.client.Client;
  * Außerdem verwaltet/kennt das Spiel den "Client", über den es Nachrichten an 
  * andere Spiele auf anderen Rechner schicken kann.
  *
- * @author noch zu vergeben!
+ * @author Sophia
  *
  */
 public class GameOfColors {
