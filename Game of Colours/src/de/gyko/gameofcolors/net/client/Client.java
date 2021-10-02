@@ -10,6 +10,8 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Der Client
@@ -26,6 +28,7 @@ public class Client implements Runnable, Closeable {
     private boolean initialized = false;
 
     private OutputStream out;
+    private final Lock outLock = new ReentrantLock();
 
     /**
      * Erstellt und initialisiert einen Client für einen bestimmten Port.
@@ -66,8 +69,13 @@ public class Client implements Runnable, Closeable {
                         switch (request.getTarget()) {
                             case ALL:
                             case CALLER:
-                                out.write(request.getPacket().getRawContent());
-                                out.flush();
+                                outLock.lock();
+                                try {
+                                    out.write(request.getPacket().getRawContent());
+                                    out.flush();
+                                } finally {
+                                    outLock.unlock();
+                                }
                                 break;
                             default:
                                 System.err.println();
@@ -96,8 +104,13 @@ public class Client implements Runnable, Closeable {
     public void sendPacket(Packet p)  {
         if (!initialized) throw new IllegalStateException("Not initialized");
         try {
-            out.write(p.getRawContent());
-            out.flush();
+            outLock.lock();
+            try {
+                out.write(p.getRawContent());
+                out.flush();
+            } finally {
+                outLock.unlock();
+            }
             System.out.println("sent");
         } catch (IOException e) {
             e.printStackTrace();
