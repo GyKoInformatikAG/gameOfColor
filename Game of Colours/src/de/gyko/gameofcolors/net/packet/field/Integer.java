@@ -30,4 +30,18 @@ public class Integer implements Field<java.lang.Integer> {
                 ((body[2] & 0xFF) << 8 ) |
                 ((body[3] & 0xFF));
     }
+
+    @Override
+    public byte[] getHeader() {
+        return new byte[0];
+    }
+
+    @Override
+    public byte[] getBody() {
+        return new byte[] {
+                (byte)(content >> 24),
+                (byte)(content >> 16),
+                (byte)(content >> 8),
+                (byte)content.intValue() };
+    }
 }

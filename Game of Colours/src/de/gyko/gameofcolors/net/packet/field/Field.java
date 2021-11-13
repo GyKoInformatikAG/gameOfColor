@@ -41,4 +41,17 @@ public interface Field<T> {
      * @param body der, in bytes encodierte Inhalt des Fields. Die Laenge des Arrays ist getBodyLength().
      */
     void setContent(byte[] body);
+
+    /**
+     * Gibt den Header des Fields beim aktuellen content zurueck. sollte eine konstante Laenge haben.
+     * Wird vor getBody aufgerufen, moeglicherweise sollte der Inhalt vom Body gecached werden.
+     * @return der Header
+     */
+    byte[] getHeader();
+
+    /**
+     * Gibt den Body des Fields, der den Inhalt des Fields beinhaltet zurueck.
+     * @return der Body
+     */
+    byte[] getBody();
 }
