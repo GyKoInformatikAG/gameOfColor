@@ -1,7 +1,7 @@
 package de.gyko.gameofcolors.net.client;
 
-import com.sun.xml.internal.bind.v2.runtime.reflect.Lister;
 import de.gyko.gameofcolors.net.*;
+import de.gyko.gameofcolors.net.packet.Packet;
 
 import java.io.Closeable;
 import java.io.IOException;

@@ -1,11 +1,10 @@
 package de.gyko.gameofcolors.app;
 
-import static org.junit.Assert.assertFalse;
 
 import java.awt.Color;
 
 import de.gyko.gameofcolors.net.ClickPacket;
-import de.gyko.gameofcolors.net.Packet;
+import de.gyko.gameofcolors.net.packet.Packet;
 
 /**
  * Diese Klasse stellt das Spielfeld/ Battlefield dar.
@@ -40,7 +39,7 @@ public class Battlefield {
    }
    
    /**
-    * Diese Methode liefert die Farbe zurück, die das 
+    * Diese Methode liefert die Farbe zurï¿½ck, die das 
     * Spielfeld auf der Koordinate (x/y) hat.
     * @param x
     * @param y
@@ -52,7 +51,7 @@ public class Battlefield {
    
    
    /**
-    * Die Höhe des Battlefields in der Einheit Anzahl Kästchen.
+    * Die Hï¿½he des Battlefields in der Einheit Anzahl Kï¿½stchen.
     */
    private int height = 0;
    
@@ -71,7 +70,7 @@ public class Battlefield {
    }
    
    /**
-    * Die Weite des Battlefields in der Einheit Anzahl Kästchen.
+    * Die Weite des Battlefields in der Einheit Anzahl Kï¿½stchen.
     */
    private int width = 0;
    
@@ -90,7 +89,7 @@ public class Battlefield {
    }
    
    /**
-    * Die Methose gibt true zurück, wenn das Spielfeld komplett belegt ist.
+    * Die Methose gibt true zurï¿½ck, wenn das Spielfeld komplett belegt ist.
     * @return
     */
 		   

@@ -1,5 +1,7 @@
 package de.gyko.gameofcolors.net;
 
+import de.gyko.gameofcolors.net.packet.Packet;
+
 import java.nio.charset.StandardCharsets;
 
 /**

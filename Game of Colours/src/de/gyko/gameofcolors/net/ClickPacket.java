@@ -1,13 +1,13 @@
 package de.gyko.gameofcolors.net;
 
-import de.gyko.gameofcolors.app.Player;
+import de.gyko.gameofcolors.net.packet.Packet;
 
 import java.awt.*;
 
 /**
  * Das Packet, dass verschickt wird, wenn auf die Spielflaeche geklickt wurde
  */
-public class ClickPacket extends Packet{
+public class ClickPacket extends Packet {
     /**
      * Der Spieler, der geklickt hat
      */

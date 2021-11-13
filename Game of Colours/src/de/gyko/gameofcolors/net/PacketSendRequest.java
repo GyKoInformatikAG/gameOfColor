@@ -1,5 +1,7 @@
 package de.gyko.gameofcolors.net;
 
+import de.gyko.gameofcolors.net.packet.Packet;
+
 /**
  * Ein Request, ein Packet zu senden
  *
