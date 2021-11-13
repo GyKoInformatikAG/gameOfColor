@@ -34,7 +34,7 @@ public class String implements Field<java.lang.String> {
 
     @Override
     public byte[] getHeader() {
-        cachedBody = StandardCharsets.UTF_8.encode(content).array();
+        cachedBody = content.getBytes(StandardCharsets.UTF_8);
         int length = cachedBody.length;
         return new byte[]{
                 (byte)(length >> 8),
