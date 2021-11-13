@@ -1,5 +1,6 @@
 package de.gyko.gameofcolors.net.packet;
 
+import de.gyko.gameofcolors.net.packet.field.Field;
 import de.gyko.gameofcolors.net.packet.field.StringField;
 
 /**
@@ -32,5 +33,12 @@ public class TextPacket extends Packet{
      */
     public String getText() {
         return this.text.getContent();
+    }
+
+    @Override
+    public Field[] getFields() {
+        return new Field[]{
+                text
+        };
     }
 }
