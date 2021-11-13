@@ -7,14 +7,14 @@ import java.awt.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/*
- *
+/**
+ * @deprecated
  *
  * @author anonymous123-code
  */
 class PlayerJoinPacketTest {
 
-    @Test
+    /*@Test
     void getPlayerColor() {
         assertEquals(new PlayerJoinPacket("Otto", new Color(255, 255, 255)).getPlayerColor(), new Color(255, 255, 255));
     }
@@ -70,6 +70,6 @@ class PlayerJoinPacketTest {
         assertEquals("plj", playerJoinPacket1.getId());
         assertEquals("MeinNameIstOtto", playerJoinPacket1.getPlayerName());
         assertEquals(new Color(0xff, 0xff, 0xff), playerJoinPacket1.getPlayerColor());
-    }
+    }*/
 }
 

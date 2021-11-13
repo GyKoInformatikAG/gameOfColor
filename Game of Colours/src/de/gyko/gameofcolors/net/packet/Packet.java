@@ -1,6 +1,8 @@
 package de.gyko.gameofcolors.net.packet;
 
 
+import de.gyko.gameofcolors.net.packet.field.Field;
+
 /**
  * Ein einfaches Netzwerk-Packet
  *
@@ -8,41 +10,21 @@ package de.gyko.gameofcolors.net.packet;
  */
 public abstract class Packet {
     /**
-     * Der rohe Inhalt des Packets
-     */
-    protected byte[] rawContent;
-    /**
      * Die id des Packets
      */
     protected String id;
 
     /**
-     * Erzeugt ein Packet auf Basis des rohen Inhalts.
-     *
-     * @param content der rohe Inhalt
-     */
-    public Packet(byte... content) {
-        if (content.length < 3) {
-            throw new IllegalArgumentException("Too little bytes");
-        }
-        rawContent = content;
-        id = new String(new byte[]{content[0], content[1], content[2]});
-    }
-
-    /**
      * Erzeugt ein leeres Packet.
      */
-    public Packet() {
-    }
+    public Packet() {}
 
     /**
-     * Gibt den rohen Inhalt zurueck.
-     *
-     * @return der rohe Inhalt
+     * Gibt alle Felder im Packet zurueck.
+     * Sollte sich nicht veraendern
+     * @return Eine Liste mit allen Fields
      */
-    public byte[] getRawContent() {
-        return rawContent;
-    }
+    public Field[] getFields() {return new Field[0];}
 
     /**
      * Gibt die PacketId zurueck.

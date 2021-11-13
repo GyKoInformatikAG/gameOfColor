@@ -2,8 +2,8 @@ package de.gyko.gameofcolors.net.packet.field;
 
 import java.nio.charset.StandardCharsets;
 
-public class String implements Field<java.lang.String> {
-    java.lang.String content;
+public class StringField implements Field<String> {
+    String content;
     byte[] cachedBody;
 
     @Override
@@ -18,18 +18,18 @@ public class String implements Field<java.lang.String> {
     }
 
     @Override
-    public java.lang.String getContent() {
+    public String getContent() {
         return content;
     }
 
     @Override
-    public void setContent(java.lang.String content) {
+    public void setContent(String content) {
         this.content = content;
     }
 
     @Override
     public void setContent(byte[] body) {
-        this.content = new java.lang.String(body, StandardCharsets.UTF_8);
+        this.content = new String(body, StandardCharsets.UTF_8);
     }
 
     @Override

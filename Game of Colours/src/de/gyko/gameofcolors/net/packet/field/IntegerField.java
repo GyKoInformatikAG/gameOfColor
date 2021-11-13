@@ -1,7 +1,7 @@
 package de.gyko.gameofcolors.net.packet.field;
 
-public class Integer implements Field<java.lang.Integer> {
-    private java.lang.Integer content;
+public class IntegerField implements Field<java.lang.Integer> {
+    private Integer content;
 
     @Override
     public int getHeaderLength() {
@@ -14,12 +14,12 @@ public class Integer implements Field<java.lang.Integer> {
     }
 
     @Override
-    public java.lang.Integer getContent() {
+    public Integer getContent() {
         return this.content;
     }
 
     @Override
-    public void setContent(java.lang.Integer content) {
+    public void setContent(Integer content) {
         this.content = content;
     }
 

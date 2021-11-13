@@ -7,12 +7,14 @@ import java.nio.charset.StandardCharsets;
 /**
  * Ein einfaches Text Packet
  *
+ * @deprecated Bewegt zu de.gyko.gameofcolors.net.packet.TextPacket
  * @author anonymous123-code
  */
 public class TextPacket extends Packet {
     String text;
     public static final String packetId = "txt";
 
+    private final byte[] rawContent;
     /**
      * Erstellt ein neues TextPacket auf Basis eines Textes.
      *
@@ -37,7 +39,6 @@ public class TextPacket extends Packet {
      *
      * @return den rohe Inhalt
      */
-    @Override
     public byte[] getRawContent() {
         // TODO: Workaround fuer Testzwecke, Spaeter entfernen
         byte[] out = new byte[this.rawContent.length - 3];

@@ -6,6 +6,8 @@ import java.awt.*;
 
 /**
  * Das Packet, dass verschickt wird, wenn auf die Spielflaeche geklickt wurde
+ *
+ * @deprecated Bewegt zu de.gyko.gameofcolors.net.packet.ClickPacket
  */
 public class ClickPacket extends Packet {
     /**

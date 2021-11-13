@@ -1,7 +1,9 @@
 package de.gyko.gameofcolors.net.packet.field;
 
-public class Color implements Field<java.awt.Color>{
-    private java.awt.Color content;
+import java.awt.*;
+
+public class ColorField implements Field<Color>{
+    private Color content;
 
     @Override
     public int getHeaderLength() {
@@ -14,18 +16,18 @@ public class Color implements Field<java.awt.Color>{
     }
 
     @Override
-    public java.awt.Color getContent() {
+    public Color getContent() {
         return this.content;
     }
 
     @Override
-    public void setContent(java.awt.Color content) {
+    public void setContent(Color content) {
         this.content = content;
     }
 
     @Override
     public void setContent(byte[] body) {
-        this.content = new java.awt.Color(Byte.toUnsignedInt(body[0]), Byte.toUnsignedInt(body[1]), Byte.toUnsignedInt(body[2]));
+        this.content = new Color(Byte.toUnsignedInt(body[0]), Byte.toUnsignedInt(body[1]), Byte.toUnsignedInt(body[2]));
     }
 
     @Override
