@@ -5,6 +5,7 @@ import java.nio.charset.StandardCharsets;
 public class StringField implements Field<String> {
     String content;
     byte[] cachedBody;
+    boolean cacheChanged;
 
     @Override
     public int getHeaderLength() {
@@ -24,17 +25,24 @@ public class StringField implements Field<String> {
 
     @Override
     public void setContent(String content) {
+        this.cacheChanged = true;
         this.content = content;
     }
 
     @Override
     public void setContent(byte[] body) {
+        this.cacheChanged = true;
         this.content = new String(body, StandardCharsets.UTF_8);
+    }
+
+    public void updateCache(){
+        if (cacheChanged) this.cachedBody = this.content.getBytes(StandardCharsets.UTF_8);
+        this.cacheChanged = false;
     }
 
     @Override
     public byte[] getHeader() {
-        cachedBody = content.getBytes(StandardCharsets.UTF_8);
+        updateCache();
         int length = cachedBody.length;
         return new byte[]{
                 (byte)(length >> 8),
@@ -44,6 +52,7 @@ public class StringField implements Field<String> {
 
     @Override
     public byte[] getBody() {
+        updateCache();
         return cachedBody;
     }
 }

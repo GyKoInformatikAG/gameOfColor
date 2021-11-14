@@ -3,14 +3,13 @@ package de.gyko.netLib.server;
 import de.gyko.netLib.PacketReceiveEvent;
 import de.gyko.netLib.PacketReceiveListener;
 import de.gyko.netLib.PacketSendRequest;
-import de.gyko.gameofcolors.net.TextPacket;
+import de.gyko.netLib.packet.PacketFactory;
+import de.gyko.netLib.packet.PacketInputStream;
+import de.gyko.netLib.packet.PacketOutputStream;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Ein Thread der die Server <-> Client Connection handelt.
@@ -20,10 +19,12 @@ import java.util.Scanner;
 public class ServerThread implements Runnable {
 
     private final Socket socket;
+    private final PacketReceiveListener packetReceiveListener;
+    private final PacketFactory packetFactory;
+    private final ArrayList<PacketOutputStream> channels;
+
     private boolean closed = false;
     private int clientId = PacketReceiveEvent.CLIENT_ID_NOT_INITIALIZED;
-    private final PacketReceiveListener packetReceiveListener;
-    private ArrayList<OutputStream> channels;
 
     /**
      * Erstellt einen neuen ServerThread.
@@ -32,8 +33,14 @@ public class ServerThread implements Runnable {
      * @param packetReceiveListener der PacketReceiveListener, der bei Empfang aufgerufen wird.
      * @param channels              Die Ausgabekanaele
      */
-    public ServerThread(Socket socket, PacketReceiveListener packetReceiveListener, ArrayList<OutputStream> channels) {
+    public ServerThread(
+            Socket socket,
+            PacketReceiveListener packetReceiveListener,
+            ArrayList<PacketOutputStream> channels,
+            PacketFactory packetFactory
+    ) {
         this.socket = socket;
+        this.packetFactory = packetFactory;
         this.packetReceiveListener = packetReceiveListener;
         this.channels = channels;
     }
@@ -43,36 +50,34 @@ public class ServerThread implements Runnable {
      */
     @Override
     public void run() {
-        try (OutputStream out = socket.getOutputStream();
-             InputStream in = socket.getInputStream();
-             Scanner scanner = new Scanner(in, "UTF-8")
+        try (
+                PacketOutputStream out = new PacketOutputStream(socket.getOutputStream(), this.packetFactory);
+                PacketInputStream in = new PacketInputStream(socket.getInputStream(), this.packetFactory)
         ) {
             channels.add(out);
             while (!closed) {
-                //TODO: Packets richtig parsen
+                PacketReceiveEvent event = new PacketReceiveEvent(clientId, in.next());
+                if(!in.hasNext()) closed = true;
 
-                String input = scanner.nextLine();
-
-                PacketReceiveEvent event = new PacketReceiveEvent(clientId, new TextPacket(input));
                 synchronized (packetReceiveListener) {
                     ArrayList<PacketSendRequest> requests = packetReceiveListener.onPacketReceived(event);
                     clientId = event.getClientId();
                     for (PacketSendRequest request : requests) {
                         switch (request.getTarget()) {
                             case ALL:
-                                for (OutputStream stream : channels) {
-                                    stream.write(request.getPacket().getRawContent());
+                                for (PacketOutputStream stream : channels) {
+                                    stream.write(request.getPacket());
                                     stream.flush();
                                 }
                                 break;
                             case CALLER:
-                                out.write(request.getPacket().getRawContent());
+                                out.write(request.getPacket());
                                 out.flush();
                                 break;
                             case ALL_EXCEPT_CALLER:
-                                for (OutputStream stream : channels) {
+                                for (PacketOutputStream stream : channels) {
                                     if (stream != out) {
-                                        stream.write(request.getPacket().getRawContent());
+                                        stream.write(request.getPacket());
                                         stream.flush();
                                     }
                                 }

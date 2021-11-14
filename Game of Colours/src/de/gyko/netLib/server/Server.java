@@ -1,9 +1,10 @@
 package de.gyko.netLib.server;
 
 import de.gyko.netLib.PacketReceiveListener;
+import de.gyko.netLib.packet.PacketFactory;
+import de.gyko.netLib.packet.PacketOutputStream;
 
 import java.io.IOException;
-import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -18,8 +19,10 @@ import java.util.concurrent.Executors;
 public class Server implements Runnable {
 
     private final PacketReceiveListener packetReceiveListener;
+    private final ArrayList<PacketOutputStream> channels = new ArrayList<>();
+    private final PacketFactory packetFactory;
+
     private boolean closed = false;
-    private final ArrayList<OutputStream> channels = new ArrayList<>();
     int port;
 
     /**
@@ -28,8 +31,9 @@ public class Server implements Runnable {
      * @param packetReceiveListener der PacketReceiveListener, der benachrichtigt wird, wenn ein Packet empfangen wurde
      * @param port                  Port für den Server
      */
-    public Server(PacketReceiveListener packetReceiveListener, int port) {
+    public Server(PacketReceiveListener packetReceiveListener, PacketFactory packetFactory, int port) {
         this.port = port;
+        this.packetFactory = packetFactory;
         this.packetReceiveListener = packetReceiveListener;
         new Thread(this).start();
     }
@@ -43,7 +47,7 @@ public class Server implements Runnable {
         try (ServerSocket serverSocket = new ServerSocket(port)) {
             while (!closed) {
                 Socket socket = serverSocket.accept();
-                ServerThread serverThread = new ServerThread(socket, packetReceiveListener, channels);
+                ServerThread serverThread = new ServerThread(socket, packetReceiveListener, channels, packetFactory);
                 threadPool.submit(serverThread);
             }
         } catch (IOException e) {

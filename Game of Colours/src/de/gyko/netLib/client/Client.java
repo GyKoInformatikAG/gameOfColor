@@ -1,20 +1,18 @@
 package de.gyko.netLib.client;
 
-import de.gyko.gameofcolors.net.*;
 import de.gyko.netLib.packet.Packet;
 import de.gyko.netLib.PacketReceiveEvent;
 import de.gyko.netLib.PacketReceiveListener;
 import de.gyko.netLib.PacketSendRequest;
+import de.gyko.netLib.packet.PacketFactory;
+import de.gyko.netLib.packet.PacketInputStream;
+import de.gyko.netLib.packet.PacketOutputStream;
 
 import java.io.Closeable;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.logging.Level;
@@ -30,11 +28,12 @@ public class Client implements Runnable, Closeable {
     private final PacketReceiveListener packetReceiveListener;
     private final int port;
     private final InetAddress address;
+    private final PacketFactory packetFactory;
 
     private boolean closed = false;
     private boolean initialized = false;
 
-    private OutputStream out;
+    private PacketOutputStream out;
     private final Lock outLock = new ReentrantLock();
 
     private static Logger logger = null;
@@ -46,11 +45,12 @@ public class Client implements Runnable, Closeable {
      * @param address               die Adresse zum Verbinden
      * @param port                  Port für den Server
      */
-    public Client(PacketReceiveListener packetReceiveListener, InetAddress address, int port) {
+    public Client(PacketReceiveListener packetReceiveListener, PacketFactory packetFactory, InetAddress address, int port) {
         if (logger == null) {
             logger = Logger.getLogger("de.gyko.netLib.client");
-            logger.setLevel(Level.FINE);
+            logger.setLevel(Level.INFO);
         }
+        this.packetFactory = packetFactory;
         this.port = port;
         this.address = address;
         this.packetReceiveListener = packetReceiveListener;
@@ -62,27 +62,19 @@ public class Client implements Runnable, Closeable {
      */
     @Override
     public void run() {
-        try (Socket socket = new Socket(this.address, this.port);
-             OutputStream out = socket.getOutputStream();
-             InputStream in = socket.getInputStream();
-             Scanner scanner = new Scanner(in, "UTF-8")) {
+        try (
+                Socket socket = new Socket(this.address, this.port);
+                PacketOutputStream out = new PacketOutputStream(socket.getOutputStream(), packetFactory);
+                PacketInputStream in = new PacketInputStream(socket.getInputStream(), packetFactory)
+        ) {
             this.initialized = true;
-            System.out.println("Ready");
+            logger.fine("Ready");
             this.out = out;
             while (!closed) {
-
-                //TODO: Packets richtig parsen
-
-                String input = scanner.nextLine();
-
-                Packet p = new TextPacket(input);
-                //noinspection ConstantConditions
-                if (false) p = new Packet() {};
+                Packet p = in.next();
 
                 logger.finer("Packet("+p.getId()+") empfangen");
-                logger.finest("Packet Inhalt: " + Arrays.toString(p.getRawContent()));
-                //noinspection ConstantConditions
-                if (p instanceof TextPacket) logger.finest("Packet Inhalt: " + ((TextPacket) p).getText());
+                logger.finest("Packet Inhalt: " + p);
 
                 PacketReceiveEvent event = new PacketReceiveEvent(PacketReceiveEvent.CLIENT_ID_IS_SERVER, p);
                 synchronized (packetReceiveListener) {
@@ -94,7 +86,7 @@ public class Client implements Runnable, Closeable {
                                 logger.finest("PacketSendRequest");
                                 outLock.lock();
                                 try {
-                                    out.write(request.getPacket().getRawContent());
+                                    out.write(p);
                                     out.flush();
                                 } finally {
                                     outLock.unlock();
@@ -122,19 +114,19 @@ public class Client implements Runnable, Closeable {
     /**
      * Sendet ein Packet
      * @param p das zu sendende Packet
-     * @throws IllegalStateException wenn der Client noch nicht fertig initialisiert wurde
+     * @throws IllegalStateException, wenn der Client noch nicht fertig initialisiert wurde
      */
     public void sendPacket(Packet p)  {
         if (!initialized) throw new IllegalStateException("Not initialized");
         try {
             outLock.lock();
             try {
-                out.write(p.getRawContent());
+                out.write(p);
                 out.flush();
             } finally {
                 outLock.unlock();
             }
-            System.out.println("sent");
+            logger.fine("Sent");
         } catch (IOException e) {
             e.printStackTrace();
         }

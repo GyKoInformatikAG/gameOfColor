@@ -1,5 +1,6 @@
 package de.gyko.gameofcolors.net;
 
+import de.gyko.gameofcolors.net.packet.TextPacket;
 import de.gyko.netLib.PacketReceiveEvent;
 import de.gyko.netLib.PacketReceiveListener;
 import de.gyko.netLib.PacketSendRequest;
@@ -30,13 +31,13 @@ public class TestClient {
                     else System.out.println("Unknown packet");
                     return null;
                 }
-            }, InetAddress.getByName(address), port)
+            }, new TestPacketFactory(), InetAddress.getByName(address), port)
             ) {
                 in.nextLine();
                 while (true) {
                     String line = in.nextLine();
                     if (line.equalsIgnoreCase("-!exit")) break;
-                    client.sendPacket(new TextPacket(line + '\n'));
+                    client.sendPacket(new TextPacket(line));
                 }
             } catch (UnknownHostException e) {
                 e.printStackTrace();

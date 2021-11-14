@@ -9,7 +9,7 @@ public class GameOfColorsTest {
 		
 		GameOfColors einKonkretesSpiel = new GameOfColors();
 
-		Client einneuerClient = new Client(null, null, 0);
+		Client einneuerClient = new Client(null, null, null, 0);
 		
 		Battlefield einneuesBattlefield = new Battlefield(einKonkretesSpiel);
 		

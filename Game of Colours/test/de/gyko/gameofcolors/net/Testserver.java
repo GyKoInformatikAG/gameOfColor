@@ -1,5 +1,6 @@
 package de.gyko.gameofcolors.net;
 
+import de.gyko.gameofcolors.net.packet.TextPacket;
 import de.gyko.netLib.PacketReceiveEvent;
 import de.gyko.netLib.PacketReceiveListener;
 import de.gyko.netLib.PacketSendRequest;
@@ -25,7 +26,7 @@ public class Testserver {
                     String input = ((TextPacket) p.getPacket()).getText();
                     String[] inputSplit = input.split(" ");
                     if (inputSplit.length < 2) {
-                        requests.add(new PacketSendRequest(Target.ALL_EXCEPT_CALLER, new TextPacket(input + '\n')));
+                        requests.add(new PacketSendRequest(Target.ALL_EXCEPT_CALLER, new TextPacket(input)));
                     } else if (inputSplit[0].equalsIgnoreCase("set")) {
                         if (inputSplit.length == 2) {
                             map.remove(inputSplit[1]);
@@ -35,14 +36,14 @@ public class Testserver {
                     } else if (inputSplit[0].equalsIgnoreCase("get")) {
                         System.out.println(map);
                         String result = map.get(inputSplit[1]);
-                        result = (result != null ? result : "ERROR: Key not found") + '\n';
+                        result = (result != null ? result : "ERROR: Key not found");
                         requests.add(new PacketSendRequest(Target.CALLER, new TextPacket(result)));
                     } else {
-                        requests.add(new PacketSendRequest(Target.ALL_EXCEPT_CALLER, new TextPacket(input + '\n')));
+                        requests.add(new PacketSendRequest(Target.ALL_EXCEPT_CALLER, new TextPacket(input)));
                     }
                 }
                 return requests;
             }
-        }, 6000);
+        }, new TestPacketFactory(), 6000);
     }
 }
