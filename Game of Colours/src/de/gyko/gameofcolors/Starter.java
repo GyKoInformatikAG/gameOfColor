@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 import de.gyko.gameofcolors.app.Battlefield;
 import de.gyko.gameofcolors.app.GameOfColors;
 import de.gyko.gameofcolors.gui.MainWindow;
-import de.gyko.gameofcolors.net.client.Client;
+import de.gyko.netLib.client.Client;
 
 /**
  * Diese Klasse startet das Spiel.

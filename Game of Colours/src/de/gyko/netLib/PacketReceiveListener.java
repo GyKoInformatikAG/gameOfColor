@@ -1,4 +1,4 @@
-package de.gyko.gameofcolors.net;
+package de.gyko.netLib;
 
 import java.util.ArrayList;
 

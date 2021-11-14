@@ -1,6 +1,6 @@
 package de.gyko.gameofcolors.app;
 
-import de.gyko.gameofcolors.net.client.Client;
+import de.gyko.netLib.client.Client;
 
 /**
  * Das Spiel GameOfColours

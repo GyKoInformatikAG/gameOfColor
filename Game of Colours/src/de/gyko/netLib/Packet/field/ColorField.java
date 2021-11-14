@@ -1,4 +1,4 @@
-package de.gyko.gameofcolors.net.packet.field;
+package de.gyko.netLib.Packet.field;
 
 import java.awt.*;
 

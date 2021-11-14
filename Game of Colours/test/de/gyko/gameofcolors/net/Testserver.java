@@ -1,10 +1,10 @@
-package de.gyko.gameofcolors.net.server;
+package de.gyko.gameofcolors.net;
 
-import de.gyko.gameofcolors.net.PacketReceiveEvent;
-import de.gyko.gameofcolors.net.PacketReceiveListener;
-import de.gyko.gameofcolors.net.PacketSendRequest;
-import de.gyko.gameofcolors.net.PacketSendRequest.Target;
-import de.gyko.gameofcolors.net.TextPacket;
+import de.gyko.netLib.PacketReceiveEvent;
+import de.gyko.netLib.PacketReceiveListener;
+import de.gyko.netLib.PacketSendRequest;
+import de.gyko.netLib.PacketSendRequest.Target;
+import de.gyko.netLib.server.Server;
 
 import java.util.*;
 

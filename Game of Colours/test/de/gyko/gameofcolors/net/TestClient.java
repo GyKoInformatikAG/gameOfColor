@@ -1,9 +1,9 @@
-package de.gyko.gameofcolors.net.client;
+package de.gyko.gameofcolors.net;
 
-import de.gyko.gameofcolors.net.PacketReceiveEvent;
-import de.gyko.gameofcolors.net.PacketReceiveListener;
-import de.gyko.gameofcolors.net.PacketSendRequest;
-import de.gyko.gameofcolors.net.TextPacket;
+import de.gyko.netLib.PacketReceiveEvent;
+import de.gyko.netLib.PacketReceiveListener;
+import de.gyko.netLib.PacketSendRequest;
+import de.gyko.netLib.client.Client;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;

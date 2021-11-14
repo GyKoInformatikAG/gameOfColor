@@ -1,7 +1,10 @@
-package de.gyko.gameofcolors.net.client;
+package de.gyko.netLib.client;
 
 import de.gyko.gameofcolors.net.*;
-import de.gyko.gameofcolors.net.packet.Packet;
+import de.gyko.netLib.Packet.Packet;
+import de.gyko.netLib.PacketReceiveEvent;
+import de.gyko.netLib.PacketReceiveListener;
+import de.gyko.netLib.PacketSendRequest;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -45,7 +48,7 @@ public class Client implements Runnable, Closeable {
      */
     public Client(PacketReceiveListener packetReceiveListener, InetAddress address, int port) {
         if (logger == null) {
-            logger = Logger.getLogger("de.gyko.gameofcolors.net.client");
+            logger = Logger.getLogger("de.gyko.netLib.client");
             logger.setLevel(Level.FINE);
         }
         this.port = port;

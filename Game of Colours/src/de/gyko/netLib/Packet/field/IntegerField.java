@@ -1,4 +1,4 @@
-package de.gyko.gameofcolors.net.packet.field;
+package de.gyko.netLib.Packet.field;
 
 public class IntegerField implements Field<java.lang.Integer> {
     private Integer content;

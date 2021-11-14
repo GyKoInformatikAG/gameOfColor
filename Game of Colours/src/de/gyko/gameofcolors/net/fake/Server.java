@@ -1,15 +1,9 @@
 package de.gyko.gameofcolors.net.fake;
 
-import de.gyko.gameofcolors.net.PacketReceiveListener;
-import de.gyko.gameofcolors.net.server.ServerThread;
+import de.gyko.netLib.PacketReceiveListener;
 
-import java.io.IOException;
 import java.io.OutputStream;
-import java.net.ServerSocket;
-import java.net.Socket;
 import java.util.ArrayList;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class Server implements Runnable{
     private final PacketReceiveListener packetReceiveListener;

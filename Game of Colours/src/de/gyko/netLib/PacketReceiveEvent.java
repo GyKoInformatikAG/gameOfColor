@@ -1,6 +1,6 @@
-package de.gyko.gameofcolors.net;
+package de.gyko.netLib;
 
-import de.gyko.gameofcolors.net.packet.Packet;
+import de.gyko.netLib.Packet.Packet;
 
 /**
  * Ein Event, das bei Empfang eines Packets ausgeloest wird

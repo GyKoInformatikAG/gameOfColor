@@ -1,12 +1,11 @@
 package de.gyko.gameofcolors.net.fake;
 
-import de.gyko.gameofcolors.net.*;
-
 import java.io.Closeable;
 import java.io.OutputStream;
 import java.net.InetAddress;
 
-import de.gyko.gameofcolors.net.packet.Packet;
+import de.gyko.netLib.Packet.Packet;
+import de.gyko.netLib.PacketReceiveListener;
 
 /**
  * Der Client

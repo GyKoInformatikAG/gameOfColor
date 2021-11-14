@@ -1,14 +1,15 @@
-package de.gyko.gameofcolors.net.packet;
+package de.gyko.netLib.Packet;
 
-import de.gyko.gameofcolors.net.packet.field.Field;
-import de.gyko.gameofcolors.net.packet.field.StringField;
+import de.gyko.netLib.Packet.Packet;
+import de.gyko.netLib.Packet.field.Field;
+import de.gyko.netLib.Packet.field.StringField;
 
 /**
  * Ein Packet, dass einen einfachen Text enthaelt
  *
  * @author anonymous123-code
  */
-public class TextPacket extends Packet{
+public class TextPacket extends Packet {
     public static final String packetId = "txt";
     StringField text = new StringField();
 

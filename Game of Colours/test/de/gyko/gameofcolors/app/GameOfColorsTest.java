@@ -1,7 +1,6 @@
 package de.gyko.gameofcolors.app;
 
-import de.gyko.gameofcolors.app.GameOfColors;
-import de.gyko.gameofcolors.net.client.Client;
+import de.gyko.netLib.client.Client;
 
 public class GameOfColorsTest {
 	

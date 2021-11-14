@@ -1,8 +1,9 @@
 package de.gyko.gameofcolors.net.packet;
 
-import de.gyko.gameofcolors.net.packet.field.ColorField;
-import de.gyko.gameofcolors.net.packet.field.Field;
-import de.gyko.gameofcolors.net.packet.field.IntegerField;
+import de.gyko.netLib.Packet.Packet;
+import de.gyko.netLib.Packet.field.ColorField;
+import de.gyko.netLib.Packet.field.Field;
+import de.gyko.netLib.Packet.field.IntegerField;
 
 import java.awt.*;
 
@@ -11,7 +12,7 @@ import java.awt.*;
  *
  * @author anonymous123-code
  */
-public class ClickPacket extends Packet{
+public class ClickPacket extends Packet {
     public static final String packetId = "clk";
 
     /**

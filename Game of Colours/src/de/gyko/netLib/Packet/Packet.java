@@ -1,7 +1,7 @@
-package de.gyko.gameofcolors.net.packet;
+package de.gyko.netLib.Packet;
 
 
-import de.gyko.gameofcolors.net.packet.field.Field;
+import de.gyko.netLib.Packet.field.Field;
 
 /**
  * Ein einfaches Netzwerk-Packet
