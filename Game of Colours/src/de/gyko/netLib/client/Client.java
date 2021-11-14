@@ -1,7 +1,7 @@
 package de.gyko.netLib.client;
 
 import de.gyko.gameofcolors.net.*;
-import de.gyko.netLib.Packet.Packet;
+import de.gyko.netLib.packet.Packet;
 import de.gyko.netLib.PacketReceiveEvent;
 import de.gyko.netLib.PacketReceiveListener;
 import de.gyko.netLib.PacketSendRequest;

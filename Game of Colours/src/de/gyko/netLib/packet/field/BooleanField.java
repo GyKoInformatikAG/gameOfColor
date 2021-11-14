@@ -1,9 +1,12 @@
-package de.gyko.netLib.Packet.field;
+package de.gyko.netLib.packet.field;
 
-import java.awt.*;
-
-public class ColorField implements Field<Color>{
-    private Color content;
+/**
+ * Enthaelt einen Wahrheitswert.
+ *
+ * @author anonymous123-code
+ */
+public class BooleanField implements Field<Boolean> {
+    private boolean content;
 
     @Override
     public int getHeaderLength() {
@@ -12,22 +15,22 @@ public class ColorField implements Field<Color>{
 
     @Override
     public int getBodyLength(byte[] header) {
-        return 3;
+        return 1;
     }
 
     @Override
-    public Color getContent() {
+    public Boolean getContent() {
         return this.content;
     }
 
     @Override
-    public void setContent(Color content) {
+    public void setContent(Boolean content) {
         this.content = content;
     }
 
     @Override
     public void setContent(byte[] body) {
-        this.content = new Color(Byte.toUnsignedInt(body[0]), Byte.toUnsignedInt(body[1]), Byte.toUnsignedInt(body[2]));
+        this.content = 0 != body[0];
     }
 
     @Override
@@ -37,6 +40,6 @@ public class ColorField implements Field<Color>{
 
     @Override
     public byte[] getBody() {
-        return new byte[0];
+        return new byte[]{(byte) (this.content?0x01:0x00)};
     }
 }

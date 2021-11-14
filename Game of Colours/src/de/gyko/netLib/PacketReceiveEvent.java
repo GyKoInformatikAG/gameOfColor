@@ -1,6 +1,6 @@
 package de.gyko.netLib;
 
-import de.gyko.netLib.Packet.Packet;
+import de.gyko.netLib.packet.Packet;
 
 /**
  * Ein Event, das bei Empfang eines Packets ausgeloest wird

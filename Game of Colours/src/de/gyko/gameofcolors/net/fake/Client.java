@@ -4,7 +4,7 @@ import java.io.Closeable;
 import java.io.OutputStream;
 import java.net.InetAddress;
 
-import de.gyko.netLib.Packet.Packet;
+import de.gyko.netLib.packet.Packet;
 import de.gyko.netLib.PacketReceiveListener;
 
 /**

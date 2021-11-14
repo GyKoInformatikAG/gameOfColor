@@ -4,7 +4,7 @@ package de.gyko.gameofcolors.app;
 import java.awt.Color;
 
 import de.gyko.gameofcolors.net.ClickPacket;
-import de.gyko.netLib.Packet.Packet;
+import de.gyko.netLib.packet.Packet;
 
 /**
  * Diese Klasse stellt das Spielfeld/ Battlefield dar.

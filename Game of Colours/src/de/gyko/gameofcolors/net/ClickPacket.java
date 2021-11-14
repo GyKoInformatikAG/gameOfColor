@@ -1,6 +1,6 @@
 package de.gyko.gameofcolors.net;
 
-import de.gyko.netLib.Packet.Packet;
+import de.gyko.netLib.packet.Packet;
 
 import java.awt.*;
 

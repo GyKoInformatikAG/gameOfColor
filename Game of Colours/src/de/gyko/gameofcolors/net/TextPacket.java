@@ -1,13 +1,13 @@
 package de.gyko.gameofcolors.net;
 
-import de.gyko.netLib.Packet.Packet;
+import de.gyko.netLib.packet.Packet;
 
 import java.nio.charset.StandardCharsets;
 
 /**
  * Ein einfaches Text Packet
  *
- * @deprecated Bewegt zu de.gyko.netLib.Packet.TextPacket
+ * @deprecated Bewegt zu de.gyko.gameofcolors.net.packet.TextPacket
  * @author anonymous123-code
  */
 public class TextPacket extends Packet {

@@ -1,10 +1,10 @@
-package de.gyko.netLib.Packet;
+package de.gyko.gameofcolors.net.packet;
 
 
-import de.gyko.netLib.Packet.Packet;
-import de.gyko.netLib.Packet.field.ColorField;
-import de.gyko.netLib.Packet.field.Field;
-import de.gyko.netLib.Packet.field.StringField;
+import de.gyko.netLib.packet.Packet;
+import de.gyko.netLib.packet.field.ColorField;
+import de.gyko.netLib.packet.field.Field;
+import de.gyko.netLib.packet.field.StringField;
 
 /**
  * Das Packet, das ein Server sendet, wenn ein neuer Spieler dem Spiel beitritt.

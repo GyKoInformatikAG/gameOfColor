@@ -1,4 +1,4 @@
-package de.gyko.netLib.Packet.field;
+package de.gyko.netLib.packet.field;
 
 /**
  * Ein Feld in einem Packet.

@@ -1,4 +1,4 @@
-package de.gyko.netLib.Packet.field;
+package de.gyko.netLib.packet.field;
 
 public class IntegerField implements Field<java.lang.Integer> {
     private Integer content;
@@ -39,9 +39,10 @@ public class IntegerField implements Field<java.lang.Integer> {
     @Override
     public byte[] getBody() {
         return new byte[] {
-                (byte)(content >> 24),
-                (byte)(content >> 16),
-                (byte)(content >> 8),
-                (byte)content.intValue() };
+                (byte)((content >> 24) & 0xFF),
+                (byte)((content >> 16) & 0xFF),
+                (byte)((content >> 8) & 0xFF),
+                (byte)(content & 0xFF)
+        };
     }
 }

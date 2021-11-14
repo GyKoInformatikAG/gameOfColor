@@ -1,4 +1,4 @@
-package de.gyko.netLib.Packet.field;
+package de.gyko.netLib.packet.field;
 
 import java.nio.charset.StandardCharsets;
 

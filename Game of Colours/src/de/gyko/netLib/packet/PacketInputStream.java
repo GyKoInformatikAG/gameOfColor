@@ -1,6 +1,4 @@
-package de.gyko.netLib.Packet;
-
-import de.gyko.netLib.Packet.Packet;
+package de.gyko.netLib.packet;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -17,10 +15,12 @@ import java.util.function.Consumer;
 public class PacketInputStream implements Iterator<Packet>, Closeable {
     private boolean closed = false;
     private final InputStream input;
+    private final PacketFactory factory;
     private byte[] next;
 
-    public PacketInputStream(InputStream stream){
+    public PacketInputStream(InputStream stream, PacketFactory factory){
         this.input = stream;
+        this.factory = factory;
     }
 
     @Override

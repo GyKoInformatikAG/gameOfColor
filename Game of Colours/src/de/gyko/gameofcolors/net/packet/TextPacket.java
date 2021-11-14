@@ -1,8 +1,8 @@
-package de.gyko.netLib.Packet;
+package de.gyko.gameofcolors.net.packet;
 
-import de.gyko.netLib.Packet.Packet;
-import de.gyko.netLib.Packet.field.Field;
-import de.gyko.netLib.Packet.field.StringField;
+import de.gyko.netLib.packet.Packet;
+import de.gyko.netLib.packet.field.Field;
+import de.gyko.netLib.packet.field.StringField;
 
 /**
  * Ein Packet, dass einen einfachen Text enthaelt

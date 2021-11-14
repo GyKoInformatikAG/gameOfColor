@@ -1,6 +1,4 @@
-package de.gyko.netLib.Packet;
-
-import de.gyko.netLib.Packet.Packet;
+package de.gyko.netLib.packet;
 
 /**
  * Entscheidet, welche Klasse für ein Packet verwendet werden soll.

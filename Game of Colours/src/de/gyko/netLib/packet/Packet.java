@@ -1,7 +1,7 @@
-package de.gyko.netLib.Packet;
+package de.gyko.netLib.packet;
 
 
-import de.gyko.netLib.Packet.field.Field;
+import de.gyko.netLib.packet.field.Field;
 
 /**
  * Ein einfaches Netzwerk-Packet
