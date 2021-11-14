@@ -36,8 +36,9 @@ public class TextPacket extends Packet {
         return this.text.getContent();
     }
 
+    @SuppressWarnings("rawtypes")
     @Override
-    public Field[] getFields() {
+    protected Field[] getFields() {
         return new Field[]{
                 text
         };

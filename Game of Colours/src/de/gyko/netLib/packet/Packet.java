@@ -24,7 +24,8 @@ public abstract class Packet {
      * Sollte sich nicht veraendern
      * @return Eine Liste mit allen Fields
      */
-    public Field[] getFields() {return new Field[0];}
+    @SuppressWarnings("rawtypes")
+    protected Field[] getFields() {return new Field[0];}
 
     /**
      * Gibt die PacketId zurueck.

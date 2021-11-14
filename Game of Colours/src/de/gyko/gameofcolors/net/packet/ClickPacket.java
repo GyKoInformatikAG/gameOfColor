@@ -71,8 +71,9 @@ public class ClickPacket extends Packet {
         return this.y.getContent();
     }
 
+    @SuppressWarnings("rawtypes")
     @Override
-    public Field[] getFields() {
+    protected Field[] getFields() {
         return new Field[]{
                 this.x,
                 this.y,

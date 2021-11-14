@@ -59,8 +59,9 @@ public class PlayerJoinPacket extends Packet {
         return playerName.getContent();
     }
 
+    @SuppressWarnings("rawtypes")
     @Override
-    public Field[] getFields() {
+    protected Field[] getFields() {
         return new Field[]{
                 playerName,
                 playerColor
