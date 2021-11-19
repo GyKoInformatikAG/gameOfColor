@@ -51,7 +51,7 @@ public class Client implements Runnable, Closeable {
     public Client(PacketReceiveListener packetReceiveListener, PacketFactory packetFactory, InetAddress address, int port) {
         if (logger == null) {
             logger = Logger.getLogger("de.gyko.netLib.client");
-            logger.setLevel(Level.INFO);
+            logger.setLevel(Level.ALL);
         }
         this.packetFactory = packetFactory;
         this.port = port;
@@ -94,6 +94,7 @@ public class Client implements Runnable, Closeable {
                             case ALL:
                             case CALLER:
                                 logger.finest("PacketSendRequest");
+                                System.out.println("PacketSendRequest:" + request.getPacket().getId());
                                 outLock.lock();
                                 try {
                                     out.write(p);
@@ -127,7 +128,10 @@ public class Client implements Runnable, Closeable {
      * @throws IllegalStateException, wenn der Client noch nicht fertig initialisiert wurde
      */
     public void sendPacket(Packet p)  {
-        if (!initialized) throw new IllegalStateException("Not initialized");
+        if (!initialized) {
+            notInitializedQueue.add(p);
+            return;
+        }
         try {
             outLock.lock();
             try {
