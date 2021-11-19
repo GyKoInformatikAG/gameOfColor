@@ -10,14 +10,9 @@ import de.gyko.netLib.packet.PacketFactory;
 public class TestPacketFactory extends PacketFactory {
     @Override
     public Packet getPacket(String id) {
-        if ("txt".equals(id)) {
+        if (TextPacket.packetId.equals(id)) {
             return new TextPacket();
         }
         return null;
-    }
-
-    @Override
-    public boolean hasPacket(String id) {
-        return getPacket(id) != null;
     }
 }
