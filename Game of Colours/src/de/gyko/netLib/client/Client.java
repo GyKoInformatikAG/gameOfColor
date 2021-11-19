@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.logging.Level;
@@ -25,6 +27,7 @@ import java.util.logging.Logger;
  */
 public class Client implements Runnable, Closeable {
 
+    private final List<Packet> notInitializedQueue = Collections.synchronizedList(new ArrayList<>());
     private final PacketReceiveListener packetReceiveListener;
     private final int port;
     private final InetAddress address;
@@ -67,11 +70,18 @@ public class Client implements Runnable, Closeable {
                 PacketOutputStream out = new PacketOutputStream(socket.getOutputStream(), packetFactory);
                 PacketInputStream in = new PacketInputStream(socket.getInputStream(), packetFactory)
         ) {
+            socket.setSoTimeout(200);
             this.initialized = true;
             logger.fine("Ready");
             this.out = out;
+            for (Packet p : notInitializedQueue) {
+                this.out.write(p);
+            }
             while (!closed) {
                 Packet p = in.next();
+                if (p == null) {
+                    continue;
+                }
 
                 logger.finer("Packet("+p.getId()+") empfangen");
                 logger.finest("Packet Inhalt: " + p);

@@ -7,6 +7,7 @@ import de.gyko.netLib.packet.PacketOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -22,7 +23,7 @@ public class Server implements Runnable {
     private final ArrayList<PacketOutputStream> channels = new ArrayList<>();
     private final PacketFactory packetFactory;
 
-    private boolean closed = false;
+    private volatile boolean closed = false;
     int port;
 
     /**
@@ -45,10 +46,13 @@ public class Server implements Runnable {
     public void run() {
         ExecutorService threadPool = Executors.newCachedThreadPool();
         try (ServerSocket serverSocket = new ServerSocket(port)) {
+            serverSocket.setSoTimeout(1000);
             while (!closed) {
-                Socket socket = serverSocket.accept();
-                ServerThread serverThread = new ServerThread(socket, packetReceiveListener, channels, packetFactory);
-                threadPool.submit(serverThread);
+                try {
+                    Socket socket = serverSocket.accept();
+                    ServerThread serverThread = new ServerThread(socket, packetReceiveListener, channels, packetFactory);
+                    threadPool.submit(serverThread);
+                } catch (SocketTimeoutException ignored) {}
             }
         } catch (IOException e) {
             e.printStackTrace();

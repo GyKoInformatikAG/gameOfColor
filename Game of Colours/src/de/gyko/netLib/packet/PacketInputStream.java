@@ -5,6 +5,7 @@ import de.gyko.netLib.packet.field.Field;
 import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.SocketTimeoutException;
 import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 
@@ -48,13 +49,13 @@ public class PacketInputStream extends FilterInputStream implements Iterator<Pac
             }
             return p;
         } catch (IOException e) {
-            hasNext = false;
+            hasNext = e instanceof SocketTimeoutException;
             try {
                 if(e.getMessage().equalsIgnoreCase("Connection reset")) this.close();
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
-            e.printStackTrace();
+            if (!hasNext) e.printStackTrace();
         }
         return null;
     }

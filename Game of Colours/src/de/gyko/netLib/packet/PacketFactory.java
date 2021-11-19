@@ -19,5 +19,7 @@ public abstract class PacketFactory {
      * @param id Die id des Packets
      * @return Ob fuer diese Id ein passendes Packet gefunden wurde
      */
-    public abstract boolean hasPacket(String id);
+    public boolean hasPacket(String id) {
+        return getPacket(id) != null;
+    }
 }
