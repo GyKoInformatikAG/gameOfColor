@@ -47,6 +47,7 @@ public class PacketInputStream extends FilterInputStream implements Iterator<Pac
                 in.read(body, 0, field.getBodyLength(header));
                 field.setContent(body);
             }
+            System.out.println(p);
             return p;
         } catch (IOException e) {
             hasNext = e instanceof SocketTimeoutException;
