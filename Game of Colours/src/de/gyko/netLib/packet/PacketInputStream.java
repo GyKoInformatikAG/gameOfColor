@@ -35,9 +35,7 @@ public class PacketInputStream extends FilterInputStream implements Iterator<Pac
             //noinspection ResultOfMethodCallIgnored
             in.read(idEncoded, 0, 3);
             String id = new String(idEncoded, StandardCharsets.UTF_8);
-            System.out.println(id);
             Packet p = factory.getPacket(id);
-            System.out.println(p);
             byte[] header;
             byte[] body;
             for (@SuppressWarnings("rawtypes") Field field : p.getFields()) {

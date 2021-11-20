@@ -45,8 +45,6 @@ public class TickTackToeClient {
                             int pos = in.nextInt();
                             int x = pos % 3;
                             int y = pos / 3;
-                            System.out.println(x);
-                            System.out.println(y);
                             field[x][y] = player;
                             requests.add(new PacketSendRequest(ALL, new PlayerPlacePacket((byte) x, (byte) y, player)));
                         }
