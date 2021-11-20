@@ -45,6 +45,9 @@ public class TickTackToeClient {
                             int pos = in.nextInt();
                             int x = pos % 3;
                             int y = pos / 3;
+                            System.out.println(x);
+                            System.out.println(y);
+                            field[x][y] = player;
                             requests.add(new PacketSendRequest(ALL, new PlayerPlacePacket((byte) x, (byte) y, player)));
                         }
                     } else if (p.getPacket() instanceof PlayerPlacePacket){
@@ -55,6 +58,7 @@ public class TickTackToeClient {
                         int pos = in.nextInt();
                         x = pos % 3;
                         y = pos / 3;
+                        field[x][y] = player;
                         requests.add(new PacketSendRequest(ALL, new PlayerPlacePacket((byte) x, (byte) y, player)));
                     }
 
@@ -67,9 +71,9 @@ public class TickTackToeClient {
         }
     }
     private static void printField(){
-        for (byte[] b : field) {
-            for (byte player : b) {
-                System.out.print((player > 0 ? (player == 1 ? "X" : "O") : " ") + " ");
+        for (int y = 0; y < field[0].length; y++) {
+            for (byte[] bytes : field) {
+                System.out.print((bytes[y] > 0 ? (bytes[y] == 1 ? "X" : "O") : " ") + " ");
             }
             System.out.println();
         }
