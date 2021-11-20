@@ -94,10 +94,9 @@ public class Client implements Runnable, Closeable {
                             case ALL:
                             case CALLER:
                                 logger.finest("PacketSendRequest");
-                                System.out.println("PacketSendRequest:" + request.getPacket().getId());
                                 outLock.lock();
                                 try {
-                                    out.write(p);
+                                    out.write(request.getPacket());
                                     out.flush();
                                 } finally {
                                     outLock.unlock();
