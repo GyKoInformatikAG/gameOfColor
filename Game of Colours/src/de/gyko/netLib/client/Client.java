@@ -65,11 +65,13 @@ public class Client implements Runnable, Closeable {
      */
     @Override
     public void run() {
+		System.out.println("Adress:" + this.address);
         try (
                 Socket socket = new Socket(this.address, this.port);
                 PacketOutputStream out = new PacketOutputStream(socket.getOutputStream(), packetFactory);
                 PacketInputStream in = new PacketInputStream(socket.getInputStream(), packetFactory)
         ) {
+            System.out.println("Ready");
             socket.setSoTimeout(200);
             this.initialized = true;
             logger.fine("Ready");

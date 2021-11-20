@@ -49,6 +49,7 @@ public class TickTackToeClient {
                             requests.add(new PacketSendRequest(ALL, new PlayerPlacePacket((byte) x, (byte) y, player)));
                         }
                     } else if (p.getPacket() instanceof PlayerPlacePacket){
+                    	System.out.println("Empfangen");
                         int x = ((PlayerPlacePacket) p.getPacket()).getX();
                         int y = ((PlayerPlacePacket) p.getPacket()).getY();
                         field[x][y] = ((PlayerPlacePacket) p.getPacket()).getPlayerId();
