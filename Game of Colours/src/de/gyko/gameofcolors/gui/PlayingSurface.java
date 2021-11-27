@@ -4,7 +4,9 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import javax.swing.JPanel;
+
 import de.gyko.gameofcolors.app.Battlefield;
 
 /**
@@ -23,15 +25,7 @@ public class PlayingSurface extends JPanel {
 	 * Create the frame.
 	 */
 	public PlayingSurface() {
-		addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				System.out.println("Hallo");
-			}
-		});
-		//TODO
-
-		setBackground(Color.BLUE);
+		initComponents();
 	}
 
 	@Override
@@ -40,11 +34,32 @@ public class PlayingSurface extends JPanel {
 		super.paintComponent(g);
 	}
 
+	/**
 
+	* In dieser Methode werden die Komponenten der „PlayingSurface“
+	initialisiert. Die Methode wird also von ihren Konstruktoren aufgerufen.
+
+	*/
+
+	private void initComponents() {
+
+		addMouseListener(new MouseAdapter() {
+			@Override
+			
+			public void mouseClicked(MouseEvent e) {
+				System.out.println("Hallo");
+			}
+		});
+		//TODO
+
+		setBackground(Color.BLUE);
+	}
+	
 	public PlayingSurface(Battlefield field) {
-		this();
-
+		
 		this.field=field;
+		
+		initComponents();
 	}
 
 }

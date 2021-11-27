@@ -39,7 +39,7 @@ public class Battlefield {
    }
    
    /**
-    * Diese Methode liefert die Farbe zur�ck, die das 
+    * Diese Methode liefert die Farbe zurueck, die das 
     * Spielfeld auf der Koordinate (x/y) hat.
     * @param x
     * @param y
@@ -51,7 +51,7 @@ public class Battlefield {
    
    
    /**
-    * Die H�he des Battlefields in der Einheit Anzahl K�stchen.
+    * Die Hoehe des Battlefields in der Einheit Anzahl Kaestchen.
     */
    private int height = 0;
    
@@ -70,7 +70,7 @@ public class Battlefield {
    }
    
    /**
-    * Die Weite des Battlefields in der Einheit Anzahl K�stchen.
+    * Die Weite des Battlefields in der Einheit Anzahl Kaestchen.
     */
    private int width = 0;
    
@@ -89,7 +89,7 @@ public class Battlefield {
    }
    
    /**
-    * Die Methose gibt true zur�ck, wenn das Spielfeld komplett belegt ist.
+    * Die Methose gibt true zurueck, wenn das Spielfeld komplett belegt ist.
     * @return
     */
 		   
