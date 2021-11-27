@@ -63,7 +63,7 @@ public class TickTackToeClient {
 
                     return requests;
                 }
-            }, new TickTackToePacketFactory(), InetAddress.getByName(new Scanner(System.in).nextLine()), 6001);
+            }, new TickTackToePacketFactory(), InetAddress.getByName(new Scanner(System.in).nextLine()), 14999);
             client.sendPacket(new PlayerJoinRequestPacket());
         } catch (UnknownHostException e) {
             e.printStackTrace();

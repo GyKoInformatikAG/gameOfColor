@@ -33,6 +33,6 @@ public class TickTackToeServer {
                 }
                 return result;
             }
-        }, new TickTackToePacketFactory(), 6001);
+        }, new TickTackToePacketFactory(), 14999);
     }
 }
