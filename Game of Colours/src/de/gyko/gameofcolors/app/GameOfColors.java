@@ -19,7 +19,7 @@ public class GameOfColors {
 	/** 
 	 * Das Spielfeld, auf dem die Spieler ihre Farben setzen.
 	 */
-	private Battlefield battlefield = null;
+	private Battlefield battlefield = new Battlefield(this);
 	
 	/**
 	 * Der Client, der für das Versenden für Paketen (Objekte der Klasse "Packet") sorgt.
