@@ -24,6 +24,17 @@ public class Player {
 	private Color color = null;
 
 	/**
+	 * Erzeugt einen Spieler mit einer Farbe und einem Namen
+	 * @param name
+	 * @param color
+	 */
+	public Player(Color color, String name) {
+		super();
+		this.name = name;
+		this.color = color;
+	}
+
+	/**
 	 * @return the color
 	 */
 	public Color getColor() {
@@ -31,24 +42,10 @@ public class Player {
 	}
 
 	/**
-	 * @param color the color to set
-	 */
-	public void setColor(Color color) {
-		this.color = color;
-	}
-
-	/**
 	 * @return the name
 	 */
 	public String getName() {
 		return name;
-	}
-
-	/**
-	 * @param name the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
 	} 
 
 }
