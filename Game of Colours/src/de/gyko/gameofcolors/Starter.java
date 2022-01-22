@@ -17,6 +17,8 @@ import de.gyko.netLib.client.Client;
  */
 public class Starter {
 	
+	GameOfColors newGame;
+	
 	/**
 	 * Diese Methode erzeugt den Starter des Spiels und ruft seine run-Methode auf.
 	 *   
@@ -34,7 +36,7 @@ public class Starter {
 	private void run() {
 		initializeApplication();
 		initializeNet();
-		GameOfColors newGame = createGame();
+		newGame = createGame();
 //		createAndShowConnectingDialog(newGame);
 		createAndShowMainWindow(newGame);
 	}
@@ -72,8 +74,7 @@ public class Starter {
 	 * @param newGame 
 	 */
 	private void createAndShowMainWindow(GameOfColors newGame) {
-		MainWindow mainWindow = new MainWindow();
-		// TODO: Dem mainWindow das Spiel übergeben.
+		MainWindow mainWindow = new MainWindow(newGame);
 		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

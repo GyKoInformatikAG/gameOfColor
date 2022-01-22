@@ -21,17 +21,14 @@ public class PlayingSurface extends JPanel {
 	private Battlefield field;
 
 
-	/**
-	 * Create the frame.
-	 */
-	public PlayingSurface() {
-		initComponents();
-	}
-
 	@Override
 	protected void paintComponent(Graphics g) {
 		// TODO Auto-generated method stub
 		super.paintComponent(g);
+		
+		g.setColor(Color.YELLOW);
+		
+		g.fillRect(300, 400, 20, 20);
 	}
 
 	/**
@@ -41,25 +38,29 @@ public class PlayingSurface extends JPanel {
 
 	*/
 
-	private void initComponents() {
-
-		addMouseListener(new MouseAdapter() {
-			@Override
-			
-			public void mouseClicked(MouseEvent e) {
-				System.out.println("Hallo");
-			}
-		});
-		//TODO
-
-		setBackground(Color.BLUE);
-	}
 	
 	public PlayingSurface(Battlefield field) {
 		
 		this.field=field;
 		
-		initComponents();
+		addMouseListener(new MouseAdapter() {
+			@Override
+			
+			public void mouseClicked(MouseEvent e) {
+				//System.out.println(e.getX() + " " + e.getY());
+				//System.out.println("Der rechte untere Pixel hat die Koordinate: (" + getWidth() + "|" + getHeight() + ")" );
+			
+			int WidthInCoordinates = getWidth() / field.getWidth();
+			
+			int HeightInCoordinates = getHeight() / field.getHeight();
+			
+			
+			
+			}
+		});
+		//TODO
+
+		setBackground(Color.BLUE);
 	}
 
 }

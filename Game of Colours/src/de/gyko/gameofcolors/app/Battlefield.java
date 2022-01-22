@@ -9,6 +9,12 @@ import de.gyko.netLib.packet.Packet;
 /**
  * Diese Klasse stellt das Spielfeld/ Battlefield dar.
  * 
+ * Auf der x- und y-Achse des Koodrdinatensystems befinden sich 		
+ * Kästchen, wobei das erste Kästchen direkt am Ursprung 		
+ * die Koordinate (0/0) hat.
+ * Daher wird auf den Achsen von Null bis getWidth()-1 und getHeigth()-1 "nummeriert".
+ * Der Ursprung liegt unten links im "Battlefield".
+ * 
  * @author sophia
  *
  */
