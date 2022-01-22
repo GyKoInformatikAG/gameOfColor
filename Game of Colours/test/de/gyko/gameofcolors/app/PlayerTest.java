@@ -2,8 +2,6 @@ package de.gyko.gameofcolors.app;
 
 import java.awt.Color;
 
-import de.gyko.gameofcolors.app.Player;
-
 /**
  * 
  * Die Klasse PlayerTest ist nur zum Testen der Klasse Player gedacht.
@@ -18,10 +16,7 @@ public class PlayerTest {
 		
 		System.out.println("Main-Methode der Klasse PlayerTest ist aufgerufen.");
 		
-		Player thorsten = new Player();
-		
-		thorsten.setName("anonymous123-code");
-		thorsten.setColor( Color.BLUE );
+		Player thorsten = new Player(Color.BLUE, "anonymous123-code");
 		
 		System.out.println( thorsten.getName() );
 		System.out.println( thorsten.getColor() );
