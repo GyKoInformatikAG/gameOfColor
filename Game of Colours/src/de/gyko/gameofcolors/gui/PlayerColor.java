@@ -3,7 +3,7 @@ package de.gyko.gameofcolors.gui;
 import java.awt.Color;
 
 /**
- * Die Aufzählung der Farben, die in dem Spiel möglich sind.
+ * Die Aufzï¿½hlung der Farben, die in dem Spiel mï¿½glich sind.
  * 
  * @author Thorsten
  */
@@ -11,7 +11,7 @@ public enum PlayerColor {
 	
 	RED("rot", Color.RED),
 	BLUE("blau", Color.BLUE),
-	GREEN("grün", Color.GREEN),
+	GREEN("gr\u00fcn", Color.GREEN),
 	YELLOW("gelb", Color.YELLOW);
 	
 	private final String text;
