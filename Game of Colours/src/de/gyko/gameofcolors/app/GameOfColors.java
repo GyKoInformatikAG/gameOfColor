@@ -6,7 +6,8 @@ import java.util.List;
 
 import javax.swing.event.EventListenerList;
 
-import de.gyko.netLib.client.Client;
+import de.gyko.gameofcolors.net.Client;
+
 
 /**
  * Das Spiel GameOfColours

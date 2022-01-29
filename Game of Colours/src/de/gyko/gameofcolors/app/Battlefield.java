@@ -41,7 +41,7 @@ public class Battlefield {
 	   Packet p = new ClickPacket(x,y,color);
 	   
 
-	   einSpiel.getClient().sendPacket(p);
+//	   einSpiel.getClient().sendPacket(p); // TODO
    }
    
    /**
