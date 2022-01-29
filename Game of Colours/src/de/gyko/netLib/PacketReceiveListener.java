@@ -7,12 +7,12 @@ import java.util.ArrayList;
  *
  * @author anonymous123-code
  */
-public abstract class PacketReceiveListener {
+public interface PacketReceiveListener {
     /**
      * Wird aufgerufen, wenn ein Packet empfangen wurde.
      *
      * @param p das PacketReceiveEvent
      * @return die Reaktionen auf das Packet, sollten vom Aufrufer verarbeitet werden
      */
-    public abstract ArrayList<PacketSendRequest> onPacketReceived(PacketReceiveEvent p);
+    ArrayList<PacketSendRequest> onPacketReceived(PacketReceiveEvent p);
 }
