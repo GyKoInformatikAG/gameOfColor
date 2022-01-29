@@ -3,7 +3,7 @@ package de.gyko.gameofcolors.app;
 
 import java.awt.Color;
 
-import de.gyko.gameofcolors.net.ClickPacket;
+import de.gyko.gameofcolors.net.packet.ClickPacket;
 import de.gyko.netLib.packet.Packet;
 
 /**
