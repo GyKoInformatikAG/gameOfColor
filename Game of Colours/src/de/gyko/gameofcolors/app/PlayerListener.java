@@ -19,7 +19,7 @@ public interface PlayerListener extends EventListener {
 	 * @see PlayerJoinEvent
 	 * @param pje
 	 */
-	public void playerJoins(PlayerJoinEvent pje);
+	public void onPlayerJoin(PlayerJoinEvent pje);
 	
 	/**
 	 * In dieser Methode wird das PlayerLeaveEvent-Ereignis verarbeitet
@@ -27,6 +27,6 @@ public interface PlayerListener extends EventListener {
 	 * @see PlayerLeaveEvent
 	 * @param ple
 	 */
-	public void playerLeave(PlayerLeaveEvent ple);
+	public void onPlayerLeave(PlayerLeaveEvent ple);
 
 }
