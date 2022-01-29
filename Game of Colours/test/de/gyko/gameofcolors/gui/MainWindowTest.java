@@ -9,6 +9,7 @@ import de.gyko.gameofcolors.app.GameOfColors;
 
 public class MainWindowTest extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
 	/**

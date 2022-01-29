@@ -286,13 +286,13 @@ public class ConnectingWindow extends JFrame implements PlayerListener {
     }
     
 	@Override
-	public void playerJoins(PlayerJoinEvent pje) {
+	public void onPlayerJoin(PlayerJoinEvent pje) {
 		Player p = game.getPlayerByColor(pje.getPlayerColor());
 		addPlayer(p.getName(), p.getColor());		
 	}
 
 	@Override
-	public void playerLeave(PlayerLeaveEvent ple) {
+	public void onPlayerLeave(PlayerLeaveEvent ple) {
 		
 	}	
 	

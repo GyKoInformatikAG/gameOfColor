@@ -35,7 +35,7 @@ public class Starter {
 	 */
 	private void run() {
 		initializeApplication();
-		initializeNet();
+//		client = createClient();
 		newGame = createGame();
 //		createAndShowConnectingDialog(newGame);
 		createAndShowMainWindow(newGame);
@@ -51,7 +51,7 @@ public class Starter {
 	/**
 	 * Initialisiert die Netzwerkschicht
 	 */
-	private void initializeNet() {
+	private void  createClient() {
 		// TODO Auto-generated method stub
 		
 	}

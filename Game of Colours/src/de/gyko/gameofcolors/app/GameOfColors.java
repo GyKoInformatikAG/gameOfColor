@@ -128,7 +128,7 @@ public class GameOfColors {
 	    Object[] listeners = listenerList.getListenerList();
 	    for (int i = listeners.length-2; i>=0; i-=2) {
 	        if (listeners[i]==PlayerListener.class) {
-	            ((PlayerListener)listeners[i+1]).playerJoins(new PlayerJoinEvent(this, player.getColor()));
+	            ((PlayerListener)listeners[i+1]).onPlayerJoin(new PlayerJoinEvent(this, player.getColor()));
 	        }
 	    }
 	}	
