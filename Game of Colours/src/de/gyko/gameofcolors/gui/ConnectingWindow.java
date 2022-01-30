@@ -9,6 +9,8 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -33,6 +35,7 @@ import de.gyko.gameofcolors.app.Player;
 import de.gyko.gameofcolors.app.PlayerJoinEvent;
 import de.gyko.gameofcolors.app.PlayerLeaveEvent;
 import de.gyko.gameofcolors.app.PlayerListener;
+import de.gyko.gameofcolors.app.State;
 
 class ComboBoxRenderer extends JPanel implements ListCellRenderer<Object> {
 
@@ -71,12 +74,15 @@ class ComboBoxRenderer extends JPanel implements ListCellRenderer<Object> {
 
 } // class ComboBoxRenderer
 
-public class ConnectingWindow extends JFrame implements PlayerListener {
+public class ConnectingWindow extends JFrame implements PlayerListener, PropertyChangeListener {
 
-	/**
-	 * Die für eine mögliche Serialisierung benötigte ID
-	 */
 	private static final long serialVersionUID = 1L;
+
+	/** Der Text des Buttons Spiel als Host Ã¶ffnen, wenn der Host auf Mitspieler wartet. */
+	private static final String BE_HOST_START_TEXT = "Spiel starten!";
+	
+	/** Der Text des Buttons Spiel als Host Ã¶ffnen, bevor der Spieler Host sein mÃ¶chte. */
+	private static final String BE_HOST_OPEN_TEXT = "Ein Spiel als Gastgeber er\u00F6ffnen...";
 	
 	/**
 	 * Das Spiel
@@ -86,14 +92,18 @@ public class ConnectingWindow extends JFrame implements PlayerListener {
 	private JPanel contentPane;
 	private JTextField txtAdressGuest;
 	private JTextField txtAdressHost;
-	private JTextField txtStatusHost;
 	private JTextField txtName;
 	private JPanel pnlSouthContent;
+	private JLabel lblStatus;
+	private JButton btnBeHost;
+	private JComboBox<PlayerColor> cBxColor;
 
 	public ConnectingWindow(GameOfColors game) {
 		this();
 		this.game = game;
 		game.addPlayerListener(this);
+		game.addPropertyChangeListener(this);
+		displayGameState();
 	}
 	
 	/**
@@ -123,14 +133,73 @@ public class ConnectingWindow extends JFrame implements PlayerListener {
 		pnlStatus.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
 		pnlSplitNorth.add(pnlStatus);
 		
-		JLabel lblStatus = new JLabel("<Status unbekannt>");
+		lblStatus = new JLabel("<Status unbekannt>");
 		pnlStatus.add(lblStatus);
+		
+		JPanel pnlSelectColor = new JPanel();
+		pnlSelectColor.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
+		pnlSplitNorth.add(pnlSelectColor);
+		
+		JLabel lblSelectColor = new JLabel("Farbe auswÃ¤hlen: ");
+		pnlSelectColor.add(lblSelectColor);
+		
+		cBxColor = new JComboBox<PlayerColor>();
+		pnlSelectColor.add(cBxColor);
+		cBxColor.setModel(new DefaultComboBoxModel<PlayerColor>(PlayerColor.values()));
+		cBxColor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JComboBox<?> cb = (JComboBox<?>)e.getSource();
+		        cb.setBackground((PlayerColor.values()[cb.getSelectedIndex()]).getColor());	
+			}
+		});
+		cBxColor.setRenderer(new ComboBoxRenderer(cBxColor.getFont()));
+		cBxColor.setBackground((PlayerColor.values()[cBxColor.getSelectedIndex()]).getColor());
+		
+		JLabel lblName = new JLabel(" Name: ");
+		pnlSelectColor.add(lblName);
+		
+		txtName = new JTextField();
+		pnlSelectColor.add(txtName);
+		txtName.setDocument(new PlainDocument() {
+
+			private static final long serialVersionUID = 1L;
+			private int maxLength = 20; // Todo: Die Maximale LÃ¤nge eines Spielernamens muss Konstante in der Klasse Player werden.
+
+		    /**
+		     * FÃ¼gt den String nur dann ein, wenn die maximale Anzahl noch nicht Ã¼berschritten ist.
+		     * 
+		     * @param offs Offset (Position, an der der String eingefuegt werden soll)
+		     * @param str  einzufuegender String
+		     * @param a    Attribut-Set (werden hier nicht weiter beachtet)
+		     * @throws BadLocationException wird "von oben" durchgereicht
+		     * @see javax.swing.text.AttributeSet
+		     * @Override
+		     */
+		    public void insertString(int offs, String str, AttributeSet a) throws BadLocationException {
+		        if (str == null) {
+		            return;
+		        }
+		        int actualLength = this.getLength();
+		        if (actualLength + str.length() <= this.maxLength) {
+		            super.insertString(offs, str, a);
+		        } else {
+		            // kein beep() hier.
+		        }
+		    }
+
+		});
+		txtName.setColumns(10);
 		
 		JPanel pnlHost = new JPanel();
 		pnlSplitNorth.add(pnlHost);
 		
-		JButton btnNewHost = new JButton("Ein Spiel als Gastgeber er\u00F6ffnen");
-		pnlHost.add(btnNewHost);
+		btnBeHost = new JButton(BE_HOST_OPEN_TEXT);
+		btnBeHost.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				btnBeHostActionPerformed();
+			}
+		});
+		pnlHost.add(btnBeHost);
 		
 		Component horizontalStrut = Box.createHorizontalStrut(50);
 		pnlHost.add(horizontalStrut);
@@ -143,15 +212,6 @@ public class ConnectingWindow extends JFrame implements PlayerListener {
 		txtAdressHost.setEditable(false);
 		txtAdressHost.setText("   ");
 		txtAdressHost.setColumns(10);
-		
-		JLabel lblStatusHost = new JLabel("Status:");
-		pnlHost.add(lblStatusHost);
-		
-		txtStatusHost = new JTextField();
-		pnlHost.add(txtStatusHost);
-		txtStatusHost.setText("kein Spiel er\u00F6ffnet");
-		txtStatusHost.setEditable(false);
-		txtStatusHost.setColumns(15);
 		
 		JPanel pnlSplitSouth = new JPanel();
 		splitPane.setRightComponent(pnlSplitSouth);
@@ -179,60 +239,15 @@ public class ConnectingWindow extends JFrame implements PlayerListener {
 		pnlBeitreten.add(txtAdressGuest);
 		txtAdressGuest.setColumns(10);
 		
-		JLabel lblName = new JLabel(" Name: ");
-		pnlBeitreten.add(lblName);
-		
-		txtName = new JTextField();
-		txtName.setDocument(new PlainDocument() {
-
-			private static final long serialVersionUID = 1L;
-			private int maxLength = 20; // Todo: Die Maximale Länge eines Spielernamens muss Konstante in der Klasse Player werden.
-
-		    /**
-		     * Fügt den String nur dann ein, wenn die maximale Anzahl noch nicht überschritten ist.
-		     * 
-		     * @param offs Offset (Position, an der der String eingefuegt werden soll)
-		     * @param str  einzufuegender String
-		     * @param a    Attribut-Set (werden hier nicht weiter beachtet)
-		     * @throws BadLocationException wird "von oben" durchgereicht
-		     * @see javax.swing.text.AttributeSet
-		     * @Override
-		     */
-		    public void insertString(int offs, String str, AttributeSet a) throws BadLocationException {
-		        if (str == null) {
-		            return;
-		        }
-		        int actualLength = this.getLength();
-		        if (actualLength + str.length() <= this.maxLength) {
-		            super.insertString(offs, str, a);
-		        } else {
-		            // kein beep() hier.
-		        }
-		    }
-
-		});
-		pnlBeitreten.add(txtName);
-		txtName.setColumns(10);
-		
-		JLabel lblFarbe = new JLabel(" Farbe: ");
-		pnlBeitreten.add(lblFarbe);
-		
-		JComboBox<PlayerColor> cBxColor = new JComboBox<PlayerColor>();
-		cBxColor.setModel(new DefaultComboBoxModel<PlayerColor>(PlayerColor.values()));
-		cBxColor.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JComboBox<?> cb = (JComboBox<?>)e.getSource();
-		        cb.setBackground((PlayerColor.values()[cb.getSelectedIndex()]).getColor());	
-			}
-		});
-		cBxColor.setRenderer(new ComboBoxRenderer(cBxColor.getFont()));
-		cBxColor.setBackground((PlayerColor.values()[cBxColor.getSelectedIndex()]).getColor());	
-		pnlBeitreten.add(cBxColor);
-		
 		Component horizontalStrut_2 = Box.createHorizontalStrut(20);
 		pnlBeitreten.add(horizontalStrut_2);
 		
 		JButton btnJoin = new JButton("Beitreten");
+		btnJoin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				btnJoinActionPerformed();
+			}
+		});
 		pnlBeitreten.add(btnJoin);
 		
 		JButton btnLeave = new JButton("Austreten");
@@ -254,13 +269,21 @@ public class ConnectingWindow extends JFrame implements PlayerListener {
 		
 	}
 
+	private void displayGameState() {
+		String displayText = game.getState().toString(); 
+		if (game.getState()!=State.NO_STATE_YET) {
+			displayText += ". Du bist " + (game.isHost()?"Gastgeber.":"Mitspieler.");
+		}
+		lblStatus.setText(displayText);
+	}
+
 	/**
-	 * Ändert den Dialog so, dass ein neuer Mitspieler angezeigt wird.
+	 * Ã„ndert den Dialog so, dass ein neuer Mitspieler angezeigt wird.
 	 * 
 	 * @param name - Der Name des Spielers
 	 * @param color - Die Farbe des Spielers
 	 */
-    public void addPlayer(String name, Color color) {
+    private void addPlayer(String name, Color color) {
 
 		JPanel pnlMS = new JPanel();
 		pnlMS.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -294,6 +317,54 @@ public class ConnectingWindow extends JFrame implements PlayerListener {
 	@Override
 	public void onPlayerLeave(PlayerLeaveEvent ple) {
 		
+	}
+
+	@Override
+	public void propertyChange(PropertyChangeEvent evt) {
+		
+		// Es sind nur StatusÃ¤nderungen des Spiels implementiert.
+		if (!evt.getPropertyName().equals("state")) return;
+		
+		displayGameState();
+		State state = (State)evt.getNewValue();
+		
+		// TODO
+		switch (state) {
+		case WAITING_FOR_START: {
+			if (game.isHost()) {
+				btnBeHost.setText(BE_HOST_START_TEXT);
+			} else {
+				
+			}				
+			break; }
+		case NO_STATE_YET: {
+			break; }
+		case GAMING: {
+			break; }
+		}
+	}
+
+	/** 
+	 * Die Methode, wenn der btnBeHost angeklickt wird.
+	 * 
+	 * @see ConnectingWindow#BE_HOST_OPEN_TEXT
+	 * @see ConnectingWindow#BE_HOST_START_TEXT
+	 */
+	private void btnBeHostActionPerformed() {
+		// Der Button Ã¤ndert seine Bedeutung je nach Status des Spiels.
+		if (game.getState()==State.NO_STATE_YET) {
+			game.openAsHost(((PlayerColor)cBxColor.getSelectedItem()).getColor(), txtName.getText());
+		} else {
+			game.sendStart();
+		}
+	}
+	
+	/**
+	 * Die Methode, wenn der btnJoin angeklickt wird.
+	 */
+	private void btnJoinActionPerformed() {
+		// TODO Auto-generated method stub
+		game.joinHost(((PlayerColor)cBxColor.getSelectedItem()).getColor(), txtName.getText());
 	}	
 	
 }

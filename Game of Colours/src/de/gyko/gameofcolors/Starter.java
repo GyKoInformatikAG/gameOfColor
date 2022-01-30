@@ -6,8 +6,7 @@ import java.util.logging.Logger;
 
 import de.gyko.gameofcolors.app.Battlefield;
 import de.gyko.gameofcolors.app.GameOfColors;
-import de.gyko.gameofcolors.gui.MainWindow;
-import de.gyko.gameofcolors.net.Client;
+import de.gyko.gameofcolors.gui.ConnectingWindow;
 
 /**
  * Diese Klasse startet das Spiel.
@@ -17,13 +16,12 @@ import de.gyko.gameofcolors.net.Client;
  */
 public class Starter {
 	
-	Client client;
 	GameOfColors newGame;
 	
 	/**
 	 * Diese Methode erzeugt den Starter des Spiels und ruft seine run-Methode auf.
 	 *   
-	 * @param args Es werden noch keine Parameter benötigt.
+	 * @param args Es werden noch keine Parameter benÃ¶tigt.
 	 */
 	public static void main(String[] args) {
 		
@@ -36,10 +34,8 @@ public class Starter {
 	 */
 	private void run() {
 		initializeApplication();
-		client = createClient();
 		newGame = createGame();
-//		createAndShowConnectingDialog(newGame);
-		createAndShowMainWindow(newGame);
+		createAndShowConnectingWindow(newGame);
 	}
 
 	/**
@@ -50,38 +46,28 @@ public class Starter {
 	}
 
 	/**
-	 * Initialisiert die Netzwerkschicht
-	 */
-	private Client createClient() {
-//		client = new Client();
-		return null; // TODO
-	}
-
-	/**
 	 * Erzeugt ein neues Spiel
 	 */
 	private GameOfColors createGame() {
-		GameOfColors einSpiel = null;
 		GameOfColors gameOfColors = new GameOfColors();
-		gameOfColors.setClient(client);
-		Battlefield theBattlefield = new Battlefield(einSpiel);
+		Battlefield theBattlefield = new Battlefield(gameOfColors);
 		gameOfColors.setBattlefield(theBattlefield);
 		return gameOfColors;
 	}
 	
 	/**
-	 * Erzeugt das GUI für das Spiel und zeigt es.
+	 * Erzeugt das ConnectingWindow und zeigt ihn.
 	 * @param newGame 
 	 */
-	private void createAndShowMainWindow(GameOfColors newGame) {
-		MainWindow mainWindow = new MainWindow(newGame);
+	private void createAndShowConnectingWindow(GameOfColors newGame) {
+		ConnectingWindow connectingWindow = new ConnectingWindow(newGame);
 		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				mainWindow.setVisible(true);
+				connectingWindow.setVisible(true);
 			}
 		});		
-	}
-
+	}	
+	
 
 }
