@@ -9,4 +9,10 @@ public interface ClientListener {
     ArrayList<PacketSendRequest> onPlayerJoin(PlayerJoinEvent event);
 
     ArrayList<PacketSendRequest> onClick(ClickEvent event);
+
+    ArrayList<PacketSendRequest> onLeaderboardUpdate(LeaderboardUpdateEvent event);
+
+    ArrayList<PacketSendRequest> onGameStart(GameStartEvent event);
+
+    ArrayList<PacketSendRequest> onGameEnd(GameEndEvent event);
 }
