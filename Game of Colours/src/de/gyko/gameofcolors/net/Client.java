@@ -31,7 +31,7 @@ public class Client {
             } else if (p.getPacket() instanceof PlayerJoinPacket) {
                 final PlayerJoinEvent e = new PlayerJoinEvent(((PlayerJoinPacket) p.getPacket()).getPLayerColor(), ((PlayerJoinPacket) p.getPacket()).getPlayerName());
                 ArrayList<PacketSendRequest> response = new ArrayList<>();
-                listeners.forEach((clientListener)-> response.addAll(clientListener.onPlayerJoin(e)));
+                listeners.forEach((clientListener) -> response.addAll(clientListener.onPlayerJoin(e)));
                 return response;
             }
             return null;
@@ -42,7 +42,7 @@ public class Client {
         this.listeners.add(listener);
     }
 
-    public void send(Packet p) {
+    public void sendPacket(Packet p) {
         this.client.sendPacket(p);
     }
 }
