@@ -16,9 +16,9 @@ public class Client {
     private final ArrayList<ClientListener> listeners = new ArrayList<>();
     private de.gyko.netLib.client.Client client;
 
-    public Client(InetAddress ip, int port){
-        this.ip = ip;
-        this.port = port;
+    public Client(InetAddress hostIp, int hostPort){
+        this.ip = hostIp;
+        this.port = hostPort;
     }
 
     public void start() {
