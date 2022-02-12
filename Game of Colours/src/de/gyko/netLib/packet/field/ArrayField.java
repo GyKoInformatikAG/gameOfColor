@@ -33,6 +33,28 @@ public class ArrayField<F extends Field<B>, B> implements Field<F[]>{
     @Override
     public void setContent(byte[] body) {
         if (body.length == 0) this.content = (F[]) Array.newInstance(contentClass, 0);
+        int length = body[0];
+        F[] arr = (F[]) Array.newInstance(contentClass, length);
+        int pos = 1;
+        int element = 0;
+        while (pos < body.length && element < length) {
+            try {
+                arr[element] = contentClass.newInstance();
+                int headerLength = getHeaderLength();
+                byte[] header = new byte[headerLength];
+                System.arraycopy(body, pos, header, 0, headerLength);
+                pos += headerLength;
+                int bodyLength = arr[element].getBodyLength(header);
+                byte[] bodyF = new byte[bodyLength];
+                System.arraycopy(body, pos, bodyF, 0, bodyLength);
+                pos += bodyLength;
+                arr[element].setContent(bodyF);
+                element++;
+            } catch (InstantiationException | IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+        this.content = arr;
     }
 
     @Override
