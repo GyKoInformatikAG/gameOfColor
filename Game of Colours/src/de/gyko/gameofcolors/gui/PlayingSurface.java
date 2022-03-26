@@ -50,11 +50,11 @@ public class PlayingSurface extends JPanel {
 				//System.out.println(e.getX() + " " + e.getY());
 				//System.out.println("Der rechte untere Pixel hat die Koordinate: (" + getWidth() + "|" + getHeight() + ")" );
 			
-				//TODO field.getWidth() und field.getHeight() sind 0
+				//TODO field.getWidth() und field.getHeight() sind 0; Sind die Koordinaten korrekt?
 				
-			int WidthInCoordinates = getWidth() / 1; //field.getWidth();
+			int WidthInCoordinates = getWidth() / field.getWidth();
 			
-			int HeightInCoordinates = getHeight() / 1; //field.getHeight();
+			int HeightInCoordinates = getHeight() / field.getHeight();
 			
 			System.out.println(WidthInCoordinates);
 			System.out.println(HeightInCoordinates);
